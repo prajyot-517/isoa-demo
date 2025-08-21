@@ -13,7 +13,7 @@ const AdditionalInsuranceCTA = () => {
           <div className="w-full sm:w-[8.5rem] hidden md:block">
             <Button
               onClick={() =>
-                window.open("https://www.myob.com/au", "_blank")
+                window.open("https://www.isoa.org/", "_blank")
               }
               label="View More"
               variant=""
@@ -25,7 +25,7 @@ const AdditionalInsuranceCTA = () => {
           </div>
           <p className="text-secondary cursor-pointer flex space-x-1 items-center md:hidden">
             <Link
-              to="https://www.myob.com/au"
+              to="https://www.isoa.org/"
               target="_blank"
               className="underline"
             >

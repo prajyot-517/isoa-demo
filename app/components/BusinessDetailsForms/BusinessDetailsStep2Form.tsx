@@ -243,8 +243,8 @@ const BusinessDetailsStep2Form: React.FC<props> = ({
                 <div className="flex flex-col space-y-3 md:flex-row md:justify-between md:space-y-0 md:space-x-4">
                   <div className="md:w-[512px] xl:max-w-3xl">
                     Are there any factors that you are currently aware of that
-                    may cause a loss or claim that may be covered under the MYOB
-                    Cyber Insurance policy you are applying for?{" "}
+                    may cause a loss or claim that may be covered under the ISOA
+                    Health Insurance policy you are applying for?{" "}
                     <span className="align-middle">
                       <QuestionTooltip tooltipContent="You need to tell us if there is anything that may affect this policy that we don't already know about. If you don't tell us, then your insurance may not be valid and you may not be covered if you need to make a claim." />
                     </span>

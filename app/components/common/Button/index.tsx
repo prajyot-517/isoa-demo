@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
         className={`w-full font-bold py-2 text-center rounded-3xl ${
           variant?.toLowerCase() === "filled" && !disabled
-            ? "bg-primaryBg border text-white border-primaryBg  focus:ring-2 dark:hover:bg-purple-900 dark:focus:ring-purple-900 transition-all duration-300 hover:bg-opacity-80 hover:scale-105 hover:shadow-lg"
+            ? "bg-primaryBg border text-white border-primaryBg  focus:ring-2 transition-all duration-300 hover:bg-opacity-80 hover:scale-105 hover:shadow-lg"
             : disabled
             ? "bg-[#D8D8D8] text-grayCustom cursor-not-allowed border-2 border-transparent"
             : "text-primaryBg border-2 border-primaryBg bg-white hover:bg-primaryBg hover:text-white"

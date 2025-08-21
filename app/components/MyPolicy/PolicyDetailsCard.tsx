@@ -531,7 +531,7 @@ const PolicyDetailsCard = ({
               information={
                 <p className="ml-7 font-medium text-sm text-primaryBg">
                   You will receive an in-depth UpGuard report within 1-3
-                  business days of buying a MYOB Cyber Insurance policy. Did not
+                  business days of buying a ISOA Health Insurance policy. Did not
                   receive it?{" "}
                   <span
                     className="text-secondary cursor-pointer underline"

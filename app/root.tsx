@@ -103,8 +103,8 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <title>MYOB Portal</title>
-        <link rel="icon" href="/myob_icon.ico" />
+        <title>ISO International Student Health Insurance</title>
+        <link rel="icon" href="/isoa_icon.svg" />
       </head>
       <body>
         <AppProvider>
@@ -140,7 +140,7 @@ export function ErrorBoundary() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <link rel="icon" href="/myob_icon.ico" />
+        <link rel="icon" href="/isoa_icon.svg" />
       </head>
       <body>
         <div>

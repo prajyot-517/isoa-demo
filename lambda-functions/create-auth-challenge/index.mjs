@@ -125,15 +125,15 @@ const createEmailTemplate = async (
   const templateData = {
     "codePlaceHolder": verificationCode,
     "contactUs": `${process.env.PORTAL_URL}/contact-us`,
-    "amiPrivacyPolicy": "https://www.myob.com/au/legal/privacy-policy",
-    "amiTermsOfUse": "https://www.myob.com/au/legal/website-terms-of-use",
+    "amiPrivacyPolicy": "https://www.isoa.org/privacy-policy",
+    "amiTermsOfUse": "https://www.isoa.org/terms",
     "policyWording": process.env.POLICY_WORDING_URL,
     "baseImageUrl": process.env.BASE_IMAGE_URL,
     "phones": {
-      "enquiry": "1300 555 123"
+      "enquiry": "(800) 244-1180"
     },
     "emails": {
-        "contact": "cyber@myob.co.au"
+        "contact": "customercare@isoa.org"
     }
   }
   const renderedBody = render(templateContent, templateData);
@@ -144,7 +144,7 @@ const createEmailTemplate = async (
     },
     Message: {
       Subject: {
-        Data: "MYOB Cyber Insurance: Verify your Email",
+        Data: "ISOA Cyber Insurance: Verify your Email",
       },
       Body: {
         Html: {
@@ -186,11 +186,11 @@ const generateVerificationCode = () => {
 
 const sendMessage = async(receiverPhoneNumber, verificationCode) => {
   try {
-    const textMessage = `Your MYOB OTP is ${verificationCode}`;
+    const textMessage = `Your ISOA OTP is ${verificationCode}`;
     const messageDetails = {
       PhoneNumber : receiverPhoneNumber,
       Message : textMessage,
-      Subject : "MYOB portal phone authentication code"
+      Subject : "ISOA portal phone authentication code"
     }
   return await new SNSClient().send(new PublishCommand(messageDetails));
   } catch (error) {

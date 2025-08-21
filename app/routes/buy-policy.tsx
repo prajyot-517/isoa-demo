@@ -273,7 +273,7 @@ const BuyPolicy = () => {
                         We collect, hold and use your personal information for
                         insurance-related and marketing purposes. We may
                         disclose it to others, including related companies of
-                        MYOB (including IAG Australia Limited), our suppliers,
+                        ISOA, our suppliers,
                         your financiers and the insurance industry, including
                         the Insurance Claims Register which holds information on
                         claims. If you give us information about someone else,
@@ -285,9 +285,8 @@ const BuyPolicy = () => {
 
                       <br />
                       <p>
-                      MYOB is a business division of IAG Australia Limited,
-                        which has a financial strength rating of AA from
-                        Standard & Poor’s (Australia) Pty Ltd.
+                      ISOA is a health division of United States,
+                        which has a financial strength rating.
                       </p>
                       <br />
                       <ul className="text-secondary ">
@@ -303,30 +302,30 @@ const BuyPolicy = () => {
                         </li> */}
                         <li>
                           <Link
-                            to="https://www.myob.com/au/legal/privacy-policy"
+                            to="https://www.isoa.org/privacy-policy"
                             target="_blank"
                             className="underline cursor-pointer"
                             rel="noreferrer"
                           >
-                            MYOB privacy policy
+                            Privacy Policy
                           </Link>
                         </li>
                         <li>
                           <Link
-                            to="https://www.myob.com/au/legal/website-terms-of-use"
+                            to="https://www.isoa.org/terms"
                             target="_blank"
                             className="underline cursor-pointer"
                             rel="noreferrer"
                           >
-                            MYOB terms of use
+                           Terms of Use
                           </Link>
                         </li>
                       </ul>
                       <br />
                       <p>
                         Clicking “Yes, I agree” means you have read all the
-                        important information above, including Cylo’s privacy
-                        policy and website terms of use and MYOB's financial
+                        important information above, including privacy
+                        policy and website terms of use and ISOA financial
                         strength rating.
                       </p>
 

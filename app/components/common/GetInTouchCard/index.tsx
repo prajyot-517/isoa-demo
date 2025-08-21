@@ -16,7 +16,7 @@ const GetInTouchCard = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="46.7188" cy="45.2812" r="45.2812" fill="#C496FF" />
+            <circle cx="46.7188" cy="45.2812" r="45.2812" fill="#A97155" />
             <circle
               cx="47.4375"
               cy="47.4375"
