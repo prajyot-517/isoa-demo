@@ -625,8 +625,8 @@ const Quote = () => {
                         parentPolicy={
                           response?.data?.policies[0]?.parent_policy
                         }
-                        //  policyId={quoteId}
-                        // quoteId={quoteIdForEmailQuote}
+                         policyId={quoteId}
+                        quoteId={quoteIdForEmailQuote}
                       />
                     )}
                   </div>
@@ -662,11 +662,11 @@ const Quote = () => {
                             </svg>
                           </div>
                           <p className="ml-7 font-medium text-primaryBg">
-                          ISOA Helath Insurance can only be paid annually via
+                          ISOA Health Insurance can only be paid annually via
                             credit card.
                             <br />
                             <br />
-                            As our ISOA Helath Insurance policy does not renew
+                            As our ISOA Health Insurance policy does not renew
                             automatically you will receive a notification from
                             us at least one month before the end date of your
                             policy. This notification will be sent to the email
@@ -740,7 +740,7 @@ const Quote = () => {
                             </span>
                             . If you have any questions, you can contact us
                             below and we’ll get in touch with you. Or call us on{" "}
-                            <span className="text-secondary">1300 555 123</span>{" "}
+                            <span className="text-secondary">(800) 244-1180</span>{" "}
                             (Mon-Fri 9am-5pm) with your quote number{" "}
                             <span className="font-black">
                               {quoteData?.quote?.quote_number}
@@ -763,9 +763,9 @@ const Quote = () => {
                   </div>
                 </div>
 
-                <div className="py-14">
+                {/* <div className="py-14">
                   <GetInTouchCard />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

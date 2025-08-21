@@ -99,7 +99,7 @@ const CancelPolicyStep1 = () => {
                         contact us
                       </span>{" "}
                       or give us a call at{" "}
-                      <span className="text-secondary"> 1300 555 123 </span>
+                      <span className="text-secondary"> (800) 244-1180 </span>
                       (Mon-Fri 9am-5pm).
                     </p>
                   </div>

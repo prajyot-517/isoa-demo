@@ -1584,12 +1584,15 @@ export default function ContactDetails() {
   //To check if user has refreshed, if yes then redirect him to first page business details-1
   useEffect(() => {
     if (
-      (Object?.keys(businessDetails?.insured_industry)?.length == 0 ||
-        businessDetails?.insured_industry == "") &&
-      businessDetails?.industry_name?.length == 0 &&
-      businessDetails?.num_employees?.length == 0 &&
-      businessDetails?.has_50PCT_overseas_revenue?.length == 0 &&
-      businessDetails?.description?.length ==0
+      (Object?.keys(businessDetails?.visa_status)?.length == 0 ||
+        businessDetails?.visa_status == "") &&
+      businessDetails?.school?.length == 0 &&
+      businessDetails?.age?.length == 0 &&
+      // businessDetails?.has_50PCT_overseas_revenue?.length == 0 &&
+      // businessDetails?.description?.length ==0
+      businessDetails?.waive_out?.length == 0 &&
+    (businessDetails?.waive_out == "no" &&
+      businessDetails?.description?.length == 0)
     ) {
       navigate("/business-details-1?quoteId=" + quoteId);
     }

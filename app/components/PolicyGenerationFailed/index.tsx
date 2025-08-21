@@ -25,7 +25,7 @@ const PolicyGenerationFailed = (props: any) => {
             <br />
             If you do not receive your policy documents, <br /> please reach out
             to a BIC using the contact us form below or call us on{" "}
-            <span className="text-secondary"> 1300 555 123</span> (Mon-Fri
+            <span className="text-secondary"> (800) 244-1180</span> (Mon-Fri
             9am-5pm).
             <br />
             <br />

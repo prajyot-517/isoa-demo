@@ -67,7 +67,7 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
   const handleSelectSchool = (school: string) => {
     setBusinessDetails({
       ...businessDetails,
-      industry_name: school,
+      school: school,
     });
     setSearchTerm(school);
     setShowList(false);
@@ -83,16 +83,16 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
             <div className="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
               <label htmlFor="industry_code">My visa status</label>
               <select
-                name="insured_industry"
-                value={businessDetails?.insured_industry || ""}
+                name="visa_status"
+                value={businessDetails?.visa_status || ""}
                 onChange={(e) => {
                   handleChange(e, "text");
                   setBusinessDetails((prev) => ({
                     ...prev,
-                    insured_industry: e.target.value,
-                    num_employees: schoolDisableStatus.has(e.target.value)
+                    visa_status: e.target.value,
+                    school: schoolDisableStatus.has(e.target.value)
                       ? ""
-                      : prev?.insured_industry ?? "",
+                      : prev?.visa_status ?? "",
                   }));
                   if (schoolDisableStatus.has(e.target.value)) {
                     setSearchTerm("");
@@ -166,11 +166,11 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                 <div className="relative md:mt-[-4px] md:mx-4 w-full">
                   <input
                     type="text"
-                    name="industry_name"
+                    name="school"
                     value={searchTerm}
                     disabled={
-                      businessDetails?.insured_industry === "Dependent F2/J2 visa" ||
-                      businessDetails?.insured_industry === "Non-student"
+                      businessDetails?.visa_status === "Dependent F2/J2 visa" ||
+                      businessDetails?.visa_status === "Non-student"
                     }
                     onChange={(e) => {
                       setSearchTerm(e.target.value);
@@ -178,16 +178,16 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                     }}
                     placeholder="Search school"
                     className={`w-full bg-transparent border-b-2 border-primaryBg outline-none text-lg ${
-                      businessDetails?.insured_industry === "Dependent F2/J2 visa" ||
-                      businessDetails?.insured_industry === "Non-student"
+                      businessDetails?.visa_status === "Dependent F2/J2 visa" ||
+                      businessDetails?.visa_status === "Non-student"
                         ? "bg-gray-100 cursor-not-allowed"
                         : ""
                     }`}
                   />
                   {showList &&
                     searchTerm.length >= 3 &&
-                    businessDetails?.insured_industry !== "Dependent F2/J2 visa" &&
-                    businessDetails?.insured_industry !== "Non-student" && (
+                    businessDetails?.visa_status !== "Dependent F2/J2 visa" &&
+                    businessDetails?.visa_status !== "Non-student" && (
                       <>
                         <ul className="absolute z-10 bg-white border w-full max-h-48 overflow-y-auto shadow-md text-lg">
                           {filteredSchools.length > 0 ? (
@@ -222,7 +222,7 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                   <input
                     type="number"
                     min={0}
-                    name="num_employees"
+                    name="age"
                     onChange={(e) => handleChange(e, "number")}
                     onBlur={(e) => {
                       const age = parseInt(e.target.value, 10);
@@ -233,8 +233,8 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                       }
                     }}
                     className="w-full pl-6 bg-transparent border-b-2 border-primaryBg outline-none"
-                    value={businessDetails?.num_employees}
-                    id="num_employees"
+                    value={businessDetails?.age}
+                    id="age"
                   />
                 </div>
                 {/* <div className="mt-3 hidden md:block">
@@ -344,15 +344,15 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
 
               <div className="w-[289px] md:w-[335px]">
                 <ToggleButtonGroup
-                  name="has_50PCT_overseas_revenue"
-                  value={businessDetails?.has_50PCT_overseas_revenue}
+                  name="waive_out"
+                  value={businessDetails?.waive_out}
                   handleToggleChange={handleToggleChange}
-                  id="has_50PCT_overseas_revenue"
+                  id="waive_out"
                 />
               </div>
             </div>
 
-            {businessDetails?.has_50PCT_overseas_revenue === "no" && (
+            {businessDetails?.waive_out === "no" && (
               <div className="flex flex-col space-y-6">
                 <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:space-x-4 md:space-y-0">
                   <div className="md:w-[512px] xl:max-w-3xl">

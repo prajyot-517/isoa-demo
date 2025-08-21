@@ -27,7 +27,7 @@ const TechnicalErrorComponent = () => {
             <br />
             <span className="cursor-pointer text-secondary">
               {" "}
-              1300 555 123
+              (800) 244-1180
             </span>{" "}
             (Mon-Fri 9am-5pm) and we’ll get you sorted.
           </p>
