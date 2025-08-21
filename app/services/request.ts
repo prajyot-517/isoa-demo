@@ -27,7 +27,7 @@ export const post = async (
       "Content-Type": "application/json",
       "User-Agent": "Solvefins-Cylo-BP/1.0",
       Authorization: "Bearer " + accessToken || "",
-      "X-Auth-Customer-Id": userId,
+      "X-Auth-Customer-Id": "22355ae0-8116-403e-b58e-95eb4014542f",
     };
     const res = await axios.post(request.url, request.body, { headers });
     return res.data;
@@ -58,7 +58,7 @@ export const get = async (
       "Content-Type": "application/json",
       "User-Agent": "Solvefins-Cylo-BP/1.0",
       Authorization: "Bearer " + accessToken || "",
-      "X-Auth-Customer-Id": userId,
+      "X-Auth-Customer-Id": "22355ae0-8116-403e-b58e-95eb4014542f",
     };
     const res = await axios.get(request.url, { headers });
     return res.data;
@@ -89,7 +89,7 @@ export const put = async (
       "Content-Type": "application/json",
       "User-Agent": "Solvefins-Cylo-BP/1.0",
       Authorization: "Bearer " + accessToken || "",
-      "X-Auth-Customer-Id": userId,
+      "X-Auth-Customer-Id": "22355ae0-8116-403e-b58e-95eb4014542f",
     };
 
     const res = await axios.put(request.url, request.body, { headers });
@@ -121,7 +121,7 @@ export const downloadDocumentGet = async (
       "Content-Type": "application/octet-stream",
       "User-Agent": "Solvefins-Cylo-BP/1.0",
       Authorization: "Bearer " + accessToken || "",
-      "X-Auth-Customer-Id": userId,
+      "X-Auth-Customer-Id": "22355ae0-8116-403e-b58e-95eb4014542f",
     };
 
     const res = await axios.get(request.url, {

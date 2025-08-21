@@ -34,7 +34,7 @@ import {
 } from "~/constants/string";
 import { useAppContext, useToast } from "~/context/ContextProvider";
 import {
-  getCognitoUserDetails,
+  // getCognitoUserDetails,
   verifyAuthCode,
 } from "~/services/authentication.server";
 import { getActivePolicyOrQuote } from "~/services/quote.api";
@@ -621,69 +621,69 @@ export async function action({ request }: ActionFunctionArgs) {
       });
     }
 
-    const userDetails: any = await getCognitoUserDetails(session);
-    if (!userDetails[SF_UUID]) {
-      const res = await createSFUserHandler(session, userDetails);
-      if (res?.status?.statusCode) {
-        // TODO: Delete user from cognito
+    // const userDetails: any = await getCognitoUserDetails(session);
+    // if (!userDetails[SF_UUID]) {
+    //   const res = await createSFUserHandler(session, userDetails);
+    //   if (res?.status?.statusCode) {
+    //     // TODO: Delete user from cognito
 
-        return json(
-          { response: res },
-          {
-            headers: {
-              "Set-Cookie": await commitSession(session),
-            },
-          }
-        );
-      } else {
-        return redirect("/quote-processing?quoteId=new-quote", {
-          headers: {
-            "Set-Cookie": await commitSession(session),
-          },
-        });
-      }
-    } else {
-      resData = await getActivePolicyOrQuote(session);
+    //     return json(
+    //       { response: res },
+    //       {
+    //         headers: {
+    //           "Set-Cookie": await commitSession(session),
+    //         },
+    //       }
+    //     );
+    //   } else {
+    //     return redirect("/quote-processing?quoteId=new-quote", {
+    //       headers: {
+    //         "Set-Cookie": await commitSession(session),
+    //       },
+    //     });
+    //   }
+    // } else {
+    //   resData = await getActivePolicyOrQuote(session);
 
-      if (resData?.status?.statusCode === 200) {
-        if (resData?.data?.policies?.length === 0) {
-          if (isExistingUser) {
-            return json(
-              { isNothingFound: true },
-              {
-                headers: {
-                  "Set-Cookie": await commitSession(session),
-                },
-              }
-            );
-          } else {
-            return redirect("/quote-processing?quoteId=new-quote", {
-              headers: {
-                "Set-Cookie": await commitSession(session),
-              },
-            });
-          }
-        } else {
-          return json(
-            {
-              response: resData,
-              isActivePolicyOrQuoteExists: true,
-              isActiveCustomer: true,
-            },
-            {
-              headers: {
-                "Set-Cookie": await commitSession(session),
-              },
-            }
-          );
-        }
-      } else {
-        return json(
-          { response: resData },
-          { headers: { "Set-Cookie": await commitSession(session) } }
-        );
-      }
-    }
+    //   if (resData?.status?.statusCode === 200) {
+    //     if (resData?.data?.policies?.length === 0) {
+    //       if (isExistingUser) {
+    //         return json(
+    //           { isNothingFound: true },
+    //           {
+    //             headers: {
+    //               "Set-Cookie": await commitSession(session),
+    //             },
+    //           }
+    //         );
+    //       } else {
+    //         return redirect("/quote-processing?quoteId=new-quote", {
+    //           headers: {
+    //             "Set-Cookie": await commitSession(session),
+    //           },
+    //         });
+    //       }
+    //     } else {
+    //       return json(
+    //         {
+    //           response: resData,
+    //           isActivePolicyOrQuoteExists: true,
+    //           isActiveCustomer: true,
+    //         },
+    //         {
+    //           headers: {
+    //             "Set-Cookie": await commitSession(session),
+    //           },
+    //         }
+    //       );
+    //     }
+    //   } else {
+    //     return json(
+    //       { response: resData },
+    //       { headers: { "Set-Cookie": await commitSession(session) } }
+    //     );
+    //   }
+    // }
   } catch (error) {
     console.error(error);
     return {

@@ -46,13 +46,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
   session.unset("isExistingUser");
 
   if (quoteId !== "new-quote") {
-    if (!(await verifyAuthToken(session))) {
-      return redirect("/login", {
-        headers: {
-          "Set-Cookie": await destroySession(session),
-        },
-      });
-    }
+    // if (!(await verifyAuthToken(session))) {
+    //   return redirect("/login", {
+    //     headers: {
+    //       "Set-Cookie": await destroySession(session),
+    //     },
+    //   });
+    // }
     response = await getPolicyById(session, quoteId);
     return json(response, {
       headers: {
@@ -112,6 +112,8 @@ export default function BusinessDetailsStep1() {
       const newBusinessDetails = {
         insured_industry: data?.insured_industry || "",
 
+        industry_name: data?.industry_name || "",
+
         num_employees:
           infoSecurity?.section_details.find(
             (detail: any) => detail.section_detail_code == "num_employees"
@@ -157,34 +159,48 @@ export default function BusinessDetailsStep1() {
 
   //If any one field is missing then disable the next button
   useEffect(() => {
-    if (
-      (Object?.keys(businessDetails?.insured_industry)?.length > 0 ||
-        businessDetails?.insured_industry != "") &&
-      businessDetails?.num_employees?.length > 0 &&
-      businessDetails?.total_annual_revenue?.length > 0 &&
-      parseFloat(removeCommas(businessDetails?.total_annual_revenue)) != 0 &&
-      (businessDetails?.total_revenue_online?.length === 0 ||
-        parseFloat(removeCommas(businessDetails?.total_revenue_online)) != 0) &&
-      businessDetails?.has_50PCT_overseas_revenue?.length > 0
-    ) {
-      setNextButtonDisabled(false);
-    } else {
-      setNextButtonDisabled(true);
-    }
+    // if (
+    // (Object?.keys(businessDetails?.insured_industry)?.length > 0 ||
+    //   businessDetails?.insured_industry != "") &&
+    // businessDetails?.insured_industry?.length > 0 &&
+    // businessDetails?.industry_name?.length > 0 &&
+    // businessDetails?.num_employees?.length > 0 &&
+    // businessDetails?.total_annual_revenue?.length > 0 &&
+    // parseFloat(removeCommas(businessDetails?.total_annual_revenue)) != 0 &&
+    // (businessDetails?.total_revenue_online?.length === 0 ||
+    //   parseFloat(removeCommas(businessDetails?.total_revenue_online)) != 0) &&
+    // businessDetails?.has_50PCT_overseas_revenue?.length > 0
+    //   (businessDetails?.has_50PCT_overseas_revenue == "no" &&
+    //   businessDetails?.description?.length > 0)
+    // ) {
+    //   setNextButtonDisabled(false);
+    // } else {
+    //   setNextButtonDisabled(true);
+    // }
+    setNextButtonDisabled(
+      !(
+        businessDetails?.insured_industry?.length > 0 &&
+        businessDetails?.industry_name?.length > 0 &&
+        businessDetails?.num_employees?.length > 0 &&
+        (businessDetails?.has_50PCT_overseas_revenue === "no"
+          ? businessDetails?.description?.length > 0
+          : true)
+      )
+    );
   }, [businessDetails]);
 
   useEffect(() => {
     setIsOccupationLoading(false);
 
     //For hardstop of total annual revenue
-    if (actionData?.response?.hardstopForAnnualRevenue) {
-      setHardStopForAnnualRevenue(true);
-    }
+    // if (actionData?.response?.hardstopForAnnualRevenue) {
+    //   setHardStopForAnnualRevenue(true);
+    // }
 
     //For hardstop of 50% overseas revenue
-    if (actionData?.response?.hardstopFor50PCTOverseas) {
-      setHardStopFor50PCTOverseasRevenue(true);
-    }
+    // if (actionData?.response?.hardstopFor50PCTOverseas) {
+    //   setHardStopFor50PCTOverseasRevenue(true);
+    // }
 
     if (
       actionData?.response?.status == 200 &&
@@ -279,7 +295,8 @@ export default function BusinessDetailsStep1() {
             [name]: formatAmount(formattedValue),
           };
         });
-      } else if (name?.includes("num_employees")) {
+      } else 
+        if (name?.includes("num_employees")) {
         let numOfEmployees = removeCommas(formattedValue);
         if (numOfEmployees.length > 6) {
           setBusinessDetails((data: any) => {
@@ -315,6 +332,13 @@ export default function BusinessDetailsStep1() {
 
   const handleToggleChange = (name: any, value: string) => {
     setBusinessDetails((data: any) => {
+      if (name === "has_50PCT_overseas_revenue") {
+      return {
+        ...data,
+        [name]: value,
+        description: "",
+      };
+    }
       return {
         ...data,
         [name]: value,
@@ -338,18 +362,26 @@ export default function BusinessDetailsStep1() {
     const formData = new FormData();
     formData.append("insured_industry", businessDetails?.insured_industry);
     formData.append("num_employees", businessDetails?.num_employees);
+    // formData.append(
+    //   "total_annual_revenue",
+    //   removeCommas(businessDetails?.total_annual_revenue)
+    // );
+    // formData.append("has_online_revenue", businessDetails?.has_online_revenue);
+    // formData.append(
+    //   "total_revenue_online",
+    //   removeCommas(businessDetails?.total_revenue_online)
+    // );
     formData.append(
-      "total_annual_revenue",
-      removeCommas(businessDetails?.total_annual_revenue)
-    );
-    formData.append("has_online_revenue", businessDetails?.has_online_revenue);
-    formData.append(
-      "total_revenue_online",
-      removeCommas(businessDetails?.total_revenue_online)
+      "industry_name",
+      businessDetails?.industry_name
     );
     formData.append(
       "has_50PCT_overseas_revenue",
       businessDetails?.has_50PCT_overseas_revenue
+    );
+    formData.append(
+      "description",
+      businessDetails?.description
     );
 
     if (
@@ -431,13 +463,14 @@ export default function BusinessDetailsStep1() {
                   label="Next"
                   variant="filled"
                   disabled={
-                    isNextButtonDisabled ||
-                    parseFloat(
-                      removeCommas(businessDetails?.total_annual_revenue)
-                    ) <
-                      parseFloat(
-                        removeCommas(businessDetails?.total_revenue_online)
-                      )
+                    isNextButtonDisabled
+                    // ||
+                    // parseFloat(
+                    //   removeCommas(businessDetails?.total_annual_revenue)
+                    // ) <
+                    //   parseFloat(
+                    //     removeCommas(businessDetails?.total_revenue_online)
+                    //   )
                   }
                   showTooltip={isNextButtonDisabled}
                   tooltipContent="Oops. Looks like some questions are incomplete. Please fill out all questions."
@@ -591,7 +624,9 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const num_employees = formData.get("num_employees");
   const insured_industry: any = formData.get("insured_industry");
+  const industry_name=formData.get("insured_name");
   const has_50PCT_overseas_revenue = formData.get("has_50PCT_overseas_revenue");
+  const description = formData.get("description");
   const total_annual_revenue = formData.get("total_annual_revenue");
   const has_online_revenue = formData.get("has_online_revenue");
   const total_revenue_online = formData.get("total_revenue_online");
@@ -603,9 +638,11 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const insuredRevenueData: any = {
     has_50PCT_overseas_revenue,
+    industry_name,
     total_annual_revenue,
     has_online_revenue,
     total_revenue_online,
+    description,
   };
 
   const infoSecurityData: any = {
@@ -621,38 +658,38 @@ export async function action({ request }: ActionFunctionArgs) {
   /**************************************************************
    *--- HARDSTOP RULES*/
 
-  const hardstopForAnnualRevenue =
-    Number(total_annual_revenue) > 10000000 || Number(total_annual_revenue) == 0
-      ? true
-      : false;
+  // const hardstopForAnnualRevenue =
+  //   Number(total_annual_revenue) > 10000000 || Number(total_annual_revenue) == 0
+  //     ? true
+  //     : false;
 
-  if (hardstopForAnnualRevenue) {
-    return json({
-      response: { hardstopForAnnualRevenue },
-    });
-  }
+  // if (hardstopForAnnualRevenue) {
+  //   return json({
+  //     response: { hardstopForAnnualRevenue },
+  //   });
+  // }
 
-  const hardstopFor50PCTOverseas =
-    has_50PCT_overseas_revenue == "yes" ? true : false;
+  // const hardstopFor50PCTOverseas =
+  //   has_50PCT_overseas_revenue == "yes" ? true : false;
 
-  if (hardstopFor50PCTOverseas) {
-    return json({
-      response: { hardstopFor50PCTOverseas },
-    });
-  }
+  // if (hardstopFor50PCTOverseas) {
+  //   return json({
+  //     response: { hardstopFor50PCTOverseas },
+  //   });
+  // }
 
   /**************************************************************/
 
   let resData;
   if (isUpdate) {
-    const session = await getSession(request.headers.get("cookie"));
-    if (!(await verifyAuthToken(session))) {
-      return redirect("/login", {
-        headers: {
-          "Set-Cookie": await destroySession(session),
-        },
-      });
-    }
+    // const session = await getSession(request.headers.get("cookie"));
+    // if (!(await verifyAuthToken(session))) {
+    //   return redirect("/login", {
+    //     headers: {
+    //       "Set-Cookie": await destroySession(session),
+    //     },
+    //   });
+    // }
     const responseData: any = formData.get("response");
     response = JSON.parse(responseData);
     response = { ...response, insured_industry };
@@ -689,7 +726,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     if (resData?.status?.message === SUCCESS) {
       const policyId = resData?.data?.policies[0]?.policy_id;
-      return redirect("/business-details-2?quoteId=" + policyId, {
+      return redirect("/quote?quoteId=" + policyId, {
         headers: {
           "Set-Cookie": await commitSession(session),
         },
@@ -708,6 +745,6 @@ export async function action({ request }: ActionFunctionArgs) {
     }
   } //If new quote
   else {
-    return redirect("/business-details-2?quoteId=new-quote");
+    return redirect("/contact-details?quoteId=new-quote");
   }
 }

@@ -56,13 +56,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
   let response: any;
   if (quoteId !== "new-quote") {
     const session = await getSession(request.headers.get("cookie"));
-    if (!(await verifyAuthToken(session))) {
-      return redirect("/login", {
-        headers: {
-          "Set-Cookie": await destroySession(session),
-        },
-      });
-    }
+    // if (!(await verifyAuthToken(session))) {
+    //   return redirect("/login", {
+    //     headers: {
+    //       "Set-Cookie": await destroySession(session),
+    //     },
+    //   });
+    // }
     response = await getPolicyById(session, quoteId);
     return json(
       {

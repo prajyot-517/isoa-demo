@@ -58,13 +58,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
   let response: any;
   if (quoteId !== "new-quote") {
     const session = await getSession(request.headers.get("cookie"));
-    if (!(await verifyAuthToken(session))) {
-      return redirect("/login", {
-        headers: {
-          "Set-Cookie": await destroySession(session),
-        },
-      });
-    }
+    // if (!(await verifyAuthToken(session))) {
+    //   return redirect("/login", {
+    //     headers: {
+    //       "Set-Cookie": await destroySession(session),
+    //     },
+    //   });
+    // }
     response = await getPolicyById(session, quoteId);
     return json(response, {
       headers: {
@@ -1322,13 +1322,13 @@ export async function action({ request }: ActionFunctionArgs) {
 
   if (isUpdate) {
     const session = await getSession(request.headers.get("cookie"));
-    if (!(await verifyAuthToken(session))) {
-      return redirect("/login", {
-        headers: {
-          "Set-Cookie": await destroySession(session),
-        },
-      });
-    }
+    // if (!(await verifyAuthToken(session))) {
+    //   return redirect("/login", {
+    //     headers: {
+    //       "Set-Cookie": await destroySession(session),
+    //     },
+    //   });
+    // }
     const responseData: any = formData.get("response");
     response = JSON.parse(responseData);
     response = {

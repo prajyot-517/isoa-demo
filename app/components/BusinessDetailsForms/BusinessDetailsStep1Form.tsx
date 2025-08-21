@@ -5,6 +5,7 @@ import ToggleButtonGroup from "../common/ToggleButtonGroup";
 import { Form } from "@remix-run/react";
 import { useAppContext } from "~/context/ContextProvider";
 import { formatAmount, removeCommas } from "~/utils";
+import ToggleButton from "../common/ToggleButton";
 
 interface props {
   handleChange: any;
@@ -32,6 +33,22 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
   const { businessDetails, setBusinessDetails } = useAppContext();
   const [searchTerm, setSearchTerm] = useState(""); //Typed text
   const [itemSelected, setItemSelected] = useState(false);
+  const [showList, setShowList] = useState(false);
+  const [ageError, setAgeError] = useState("");
+
+  const schoolList = [
+  "Philander Smith College (AR)",
+  "Mitchell College (CT)",
+  "Smithsonian Institute (DC)",
+  "Summit Christain School (FL)",
+  "Summit Christain Academy (KS)",
+  "Smith College (MA)",
+  "Summit Christain Academy (KY)",
+  "Summit University of Louisiana (LA)",
+  "Massachusetts Institute of Technology (VA)",
+  "University of Arkansas Fort Smith (AR)",
+  "Smithsonians National Zoo and Conversation Biology Institute (DC)",
+];
 
   useEffect(() => {
     setSearchTerm(value);
@@ -40,16 +57,68 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
     }
   }, []);
 
+  const filteredSchools =
+    searchTerm.length >= 3
+      ? schoolList.filter((school) =>
+          school.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      : [];
+
+  const handleSelectSchool = (school: string) => {
+    setBusinessDetails({
+      ...businessDetails,
+      industry_name: school,
+    });
+    setSearchTerm(school);
+    setShowList(false);
+  };
+
+  const schoolDisableStatus = new Set(["Dependent F2/J2 visa", "Non-student"]);
+
   return (
     <div className="bg-white rounded-md border-0 shadow-custom">
       <div className="px-8 py-10 rounded-md md:py-20">
         <Form className="max-w-[760px] mx-auto">
           <div className="flex flex-col justify-center items-center font-extrabold text-2xl text-primary space-y-8">
             <div className="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
-              <label htmlFor="industry_code">
-                My occupation is best described as
-              </label>
-              <div className="mt-[-4px] flex flex-col items-center justify-center">
+              <label htmlFor="industry_code">My visa status</label>
+              <select
+                name="insured_industry"
+                value={businessDetails?.insured_industry || ""}
+                onChange={(e) => {
+                  handleChange(e, "text");
+                  setBusinessDetails((prev) => ({
+                    ...prev,
+                    insured_industry: e.target.value,
+                    num_employees: schoolDisableStatus.has(e.target.value)
+                      ? ""
+                      : prev?.insured_industry ?? "",
+                  }));
+                  if (schoolDisableStatus.has(e.target.value)) {
+                    setSearchTerm("");
+                    setShowList(false);
+                  }
+                }}
+                className="w-full mx-4 mt-[-4px] border-b-2 border-primaryBg text-lg outline-none lg:w-fit"
+                id="visa"
+              >
+                <option value="" disabled hidden>
+                  Select
+                </option>
+                <option value="International student">
+                  International student
+                </option>
+                <option value="International student on J1 visa">
+                  International student on J1 visa
+                </option>
+                <option value="J visa scholar">J visa scholar</option>
+                <option value="OPT">OPT</option>
+                <option value="Dependent F2/J2 visa">
+                  Dependent F2/J2 visa
+                </option>
+                <option value="Non-student">Non-student</option>
+              </select>
+              {/* <div className="mt-[-4px] flex flex-col items-center justify-center">
                 <Autocomplete
                   name={"insured_industry"}
                   businessDetails={businessDetails}
@@ -70,10 +139,10 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                     Please type in at least three characters of your occupation
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
 
-            <div className="flex flex-col items-center sm:flex-row">
+            {/* <div className="flex flex-col items-center sm:flex-row">
               <span>excluding myself, I have</span>
               <div className="flex">
                 <input
@@ -89,30 +158,90 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                 />
                 <span>employees</span>
               </div>
+            </div> */}
+
+            <div className="flex flex-col">
+              <div className="flex flex-col items-center sm:flex-row sm:space-x-4">
+                <span className="whitespace-nowrap">My school</span>
+                <div className="relative md:mt-[-4px] md:mx-4 w-full">
+                  <input
+                    type="text"
+                    name="industry_name"
+                    value={searchTerm}
+                    disabled={
+                      businessDetails?.insured_industry === "Dependent F2/J2 visa" ||
+                      businessDetails?.insured_industry === "Non-student"
+                    }
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setShowList(true);
+                    }}
+                    placeholder="Search school"
+                    className={`w-full bg-transparent border-b-2 border-primaryBg outline-none text-lg ${
+                      businessDetails?.insured_industry === "Dependent F2/J2 visa" ||
+                      businessDetails?.insured_industry === "Non-student"
+                        ? "bg-gray-100 cursor-not-allowed"
+                        : ""
+                    }`}
+                  />
+                  {showList &&
+                    searchTerm.length >= 3 &&
+                    businessDetails?.insured_industry !== "Dependent F2/J2 visa" &&
+                    businessDetails?.insured_industry !== "Non-student" && (
+                      <>
+                        <ul className="absolute z-10 bg-white border w-full max-h-48 overflow-y-auto shadow-md text-lg">
+                          {filteredSchools.length > 0 ? (
+                            filteredSchools.map((school, idx) => (
+                              <li
+                                key={idx}
+                                className="px-2 py-1 cursor-pointer hover:bg-gray-200"
+                                onClick={() => handleSelectSchool(school)}
+                              >
+                                {school}
+                              </li>
+                            ))
+                          ) : (
+                            <li className="px-2 py-1 text-gray-500 select-none">
+                              No matches
+                            </li>
+                          )}
+                        </ul>
+                      </>
+                    )}
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-col">
               <div className="flex flex-col items-center sm:flex-row sm:space-x-4">
-                <span>My business total annual revenue is</span>
+                <span>My age</span>
                 <div className="relative md:mt-[-4px] md:mx-4">
-                  <span className="absolute inset-y-0 bottom-1 left-0 px-1 flex items-center">
+                  {/* <span className="absolute inset-y-0 bottom-1 left-0 px-1 flex items-center">
                     $
-                  </span>
+                  </span> */}
                   <input
-                    type="text"
+                    type="number"
                     min={0}
-                    name="total_annual_revenue"
+                    name="num_employees"
                     onChange={(e) => handleChange(e, "number")}
+                    onBlur={(e) => {
+                      const age = parseInt(e.target.value, 10);
+                      if (!age || age < 7 || age > 64) {
+                        setAgeError("Age must be between 7 and 64.");
+                      } else {
+                        setAgeError("");
+                      }
+                    }}
                     className="w-full pl-6 bg-transparent border-b-2 border-primaryBg outline-none"
-                    value={businessDetails?.total_annual_revenue}
-                    id="total_annual_revenue"
+                    value={businessDetails?.num_employees}
+                    id="num_employees"
                   />
                 </div>
-                <div className="mt-3 hidden md:block">
+                {/* <div className="mt-3 hidden md:block">
                   <QuestionTooltip tooltipContent="Minimum revenue required is $1" />
-                </div>
+                </div> */}
               </div>
-              <div className="flex justify-center mr-4 sm:mr-0 sm:justify-end">
+              {/* <div className="flex justify-center mr-4 sm:mr-0 sm:justify-end">
                 {parseFloat(
                   removeCommas(businessDetails?.total_annual_revenue)
                 ) == 0 && (
@@ -120,16 +249,25 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                     Total revenue is less than $1.
                   </p>
                 )}
+              </div> */}
+
+              <div className="flex justify-center mr-4 sm:mr-0">
+                {ageError && (
+                  <p className="text-red-500 text-sm font-medium whitespace-nowrap">
+                    {ageError}
+                  </p>
+                )}
               </div>
+
             </div>
           </div>
 
           <div className="flex flex-col my-8 space-y-6">
-            <div className="text-primary font-700 text-lg">
+            {/* <div className="text-primary font-700 text-lg">
               Of the total revenue above:
-            </div>
+            </div> */}
 
-            <div className="flex flex-col space-x-2 space-y-4 items-center">
+            {/* <div className="flex flex-col space-x-2 space-y-4 items-center">
               <div className="flex space-x-2  justify-start w-full ">
                 <div className="flex space-x-2 text-primary font-700 text-lg">
                   <span>A)</span>{" "}
@@ -182,9 +320,9 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                     )}
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div className="flex flex-col space-y-2 justify-between w-full sm:flex-row sm:space-y-0 sm:items-center">
+            {/* <div className="flex flex-col space-y-2 justify-between w-full sm:flex-row sm:space-y-0 sm:items-center">
               <span className="flex space-x-2 text-primary font-700 text-lg">
                 <span> B)</span>{" "}
                 <div> Is more than 50% derived from overseas?</div>
@@ -197,7 +335,42 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                   id="has_50PCT_overseas_revenue"
                 />
               </div>
+            </div> */}
+
+            <div className="flex flex-col space-y-3 md:flex-row md:justify-between md:space-x-4 md:space-y-0">
+              <div className="md:w-[512px] xl:max-w-3xl">
+                Do you need to waive out of the school health insurance?
+              </div>
+
+              <div className="w-[289px] md:w-[335px]">
+                <ToggleButtonGroup
+                  name="has_50PCT_overseas_revenue"
+                  value={businessDetails?.has_50PCT_overseas_revenue}
+                  handleToggleChange={handleToggleChange}
+                  id="has_50PCT_overseas_revenue"
+                />
+              </div>
             </div>
+
+            {businessDetails?.has_50PCT_overseas_revenue === "no" && (
+              <div className="flex flex-col space-y-6">
+                <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:space-x-4 md:space-y-0">
+                  <div className="md:w-[512px] xl:max-w-3xl">
+                    What best describes you?
+                  </div>
+
+                  <div className="w-[289px] md:w-[335px]">
+                    <ToggleButton
+                      name="description"
+                      value={businessDetails?.description}
+                      handleToggleChange={handleToggleChange}
+                      id="description"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
           </div>
         </Form>
       </div>

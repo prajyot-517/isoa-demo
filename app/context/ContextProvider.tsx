@@ -20,6 +20,7 @@ type BusinessDetails = {
   total_revenue_online: string;
   insured_contact_email: string;
   has_50PCT_overseas_revenue: string;
+  description:string;
 };
 
 type BusinessDetails2 = {
@@ -235,6 +236,7 @@ const initialValueForBusinessDetails = {
   has_online_revenue: "no",
   total_revenue_online: "",
   has_50PCT_overseas_revenue: "",
+  description:"",
 };
 
 const initialValueForBusinessDetails2 = {

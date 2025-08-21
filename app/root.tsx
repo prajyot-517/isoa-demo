@@ -44,15 +44,18 @@ const Layout: React.FC<props> = ({ children }: props) => {
 
     if (pathname.includes("business-details-1")) {
       setStepState({ currentStep: 1, subStep: 1 });
-    } else if (pathname.includes("business-details-2")) {
-      setStepState({ currentStep: 1, subStep: 2 });
-    } else if (pathname.includes("business-details-3")) {
-      setStepState({ currentStep: 1, subStep: 3 });
-    } else if (pathname.includes("quote")) {
+    } 
+    // else if (pathname.includes("business-details-2")) {
+    //   setStepState({ currentStep: 1, subStep: 2 });
+    // } else if (pathname.includes("business-details-3")) {
+    //   setStepState({ currentStep: 1, subStep: 3 });
+    // } 
+    else if (pathname.includes("contact-details")) {
       setStepState({ currentStep: 2, subStep: 1 });
-    } else if (pathname.includes("contact-details")) {
+    }
+    else if (pathname.includes("quote")) {
       setStepState({ currentStep: 3, subStep: 1 });
-    } else if (pathname.includes("final-questions")) {
+    }  else if (pathname.includes("final-questions")) {
       setStepState({ currentStep: 4, subStep: 1 });
     } else if (pathname.includes("summary")) {
       setStepState({ currentStep: 5, subStep: 1 });

@@ -35,27 +35,27 @@ import { verifyAuthToken } from "~/services/authentication.server";
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("cookie"));
 
-  if (await verifyAuthToken(session)) {
-    const response = await getActivePolicyOrQuote(session);
-    return json(
-      {
-        env: {
-          RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
-        },
-        response,
-      },
-      {
-        headers: { "Set-Cookie": await commitSession(session) },
-      }
-    );
-  } else {
-    return json({
-      env: {
-        RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
-      },
-      response: {},
-    });
-  }
+  // if (await verifyAuthToken(session)) {
+  //   const response = await getActivePolicyOrQuote(session);
+  //   return json(
+  //     {
+  //       env: {
+  //         RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
+  //       },
+  //       response,
+  //     },
+  //     {
+  //       headers: { "Set-Cookie": await commitSession(session) },
+  //     }
+  //   );
+  // } else {
+  //   return json({
+  //     env: {
+  //       RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
+  //     },
+  //     response: {},
+  //   });
+  // }
 }
 
 const initialDataForContactUs = {

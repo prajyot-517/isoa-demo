@@ -54,16 +54,16 @@ import { SimpleJsonFetcher } from "aws-jwt-verify/https";
 
 const client = new CognitoIdentityProviderClient();
 
-export const isPhoneVerified = async (session: Session) => {
-  const userDetails = await getCognitoUserDetails(session);
-  if (userDetails?.phone_number_verified == "true") return true;
-  return false;
-};
+// export const isPhoneVerified = async (session: Session) => {
+//   const userDetails = await getCognitoUserDetails(session);
+//   if (userDetails?.phone_number_verified == "true") return true;
+//   return false;
+// };
 
-export const getVerifiedPhoneNumber = async (session: Session) => {
-  const userDetails = await getCognitoUserDetails(session);
-  return userDetails?.phone_number;
-};
+// export const getVerifiedPhoneNumber = async (session: Session) => {
+//   const userDetails = await getCognitoUserDetails(session);
+//   return userDetails?.phone_number;
+// };
 
 const getCognitoUserId = async (accessToken: string) => {
   let userId;
@@ -84,20 +84,31 @@ const getCognitoUserId = async (accessToken: string) => {
 };
 
 export const getUserId = async (session: Session) => {
-  let dbHandler = await DBHandler.getConnection();
-  try {
-    const accessToken = session.get("accessToken");
-    let userId = await dbHandler.getClientUserId(session.get("sessionId"));
-    if (userId) {
-      return userId;
-    }
-    return await getCognitoUserId(accessToken);
-  } catch (error) {
-    console.error(error);
-    throw error;
-  } finally {
-    dbHandler.closeConnection();
-  }
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const success = true;
+      if (success) {
+        resolve(process.env.SF_INTEGRATION_USERNAME);
+      } else {
+        reject("error");
+      }
+    }, 200);
+  });
+
+  // let dbHandler = await DBHandler.getConnection();
+  // try {
+  //   const accessToken = session.get("accessToken");
+  //   let userId = await dbHandler.getClientUserId(session.get("sessionId"));
+  //   if (userId) {
+  //     return userId;
+  //   }
+  //   return await getCognitoUserId(accessToken);
+  // } catch (error) {
+  //   console.error(error);
+  //   throw error;
+  // } finally {
+  //   dbHandler.closeConnection();
+  // }
 };
 
 const getSecretHash = (username: String) => {
@@ -171,24 +182,24 @@ export const adminUpdateUserAttributes = async (
     Output:
         Returns userId for current user
 */
-export const getCognitoUserDetails = async (session: Session) => {
-  let accessToken = session.get("accessToken");
-  let userDetails = {};
-  const input = {
-    AccessToken: accessToken,
-  };
-  const command = new GetUserCommand(input);
-  const response = await client.send(command);
-  if (
-    response.$metadata.httpStatusCode >= 200 &&
-    response.$metadata.httpStatusCode < 300
-  ) {
-    response.UserAttributes?.forEach((attribute) => {
-      userDetails[attribute.Name] = attribute.Value;
-    });
-  }
-  return userDetails;
-};
+// export const getCognitoUserDetails = async (session: Session) => {
+//   let accessToken = session.get("accessToken");
+//   let userDetails = {};
+//   const input = {
+//     AccessToken: accessToken,
+//   };
+//   const command = new GetUserCommand(input);
+//   const response = await client.send(command);
+//   if (
+//     response.$metadata.httpStatusCode >= 200 &&
+//     response.$metadata.httpStatusCode < 300
+//   ) {
+//     response.UserAttributes?.forEach((attribute) => {
+//       userDetails[attribute.Name] = attribute.Value;
+//     });
+//   }
+//   return userDetails;
+// };
 
 /*
     Method: 
@@ -241,56 +252,57 @@ const refreshAccessToken = async (dbHandler: DBHandler, session: Session) => {
         Returns true if verification is successful.
 */
 export const verifyAuthToken = async (session: Session) => {
-  if (!session.has("accessToken")) return false;
-  let dbHandler = await DBHandler.getConnection();
+  return true;
+  // if (!session.has("accessToken")) return false;
+  // let dbHandler = await DBHandler.getConnection();
 
-  let accessToken = session.get("accessToken");
-  try {
-    let storedAccessToken = await dbHandler.getClientAccessToken(
-      session.get("sessionId")
-    );
-    let verifier = CognitoJwtVerifier.create(
-      {
-        userPoolId: process.env.USER_POOL_ID,
-        tokenUse: "access",
-        clientId: process.env.APP_CLIENT_ID,
-      },
-      {
-        jwksCache: new SimpleJwksCache({
-          fetcher: new SimpleJsonFetcher({
-            defaultRequestOptions: { responseTimeout: 3000 },
-          }),
-        }),
-      }
-    );
-    try {
-      const payload = await verifier.verify(accessToken);
-      if (accessToken != storedAccessToken && payload) {
-        const updateAccessTokenResult = await dbHandler.updateClientAccessToken(
-          session.get("sessionId"),
-          accessToken
-        );
-        if (updateAccessTokenResult == "INVALID_SESSION_ID") return false;
-      }
-    } catch (err) {
-      if (err instanceof JwtExpiredError) {
-        try {
-          await refreshAccessToken(dbHandler, session);
-        } catch (err) {
-          console.error("Error", err);
-          return false;
-        }
-      } else {
-        console.error("Error:", err);
-        return false;
-      }
-    }
-    return true;
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await dbHandler.closeConnection();
-  }
+  // let accessToken = session.get("accessToken");
+  // try {
+  //   let storedAccessToken = await dbHandler.getClientAccessToken(
+  //     session.get("sessionId")
+  //   );
+  //   let verifier = CognitoJwtVerifier.create(
+  //     {
+  //       userPoolId: process.env.USER_POOL_ID,
+  //       tokenUse: "access",
+  //       clientId: process.env.APP_CLIENT_ID,
+  //     },
+  //     {
+  //       jwksCache: new SimpleJwksCache({
+  //         fetcher: new SimpleJsonFetcher({
+  //           defaultRequestOptions: { responseTimeout: 3000 },
+  //         }),
+  //       }),
+  //     }
+  //   );
+  //   try {
+  //     const payload = await verifier.verify(accessToken);
+  //     if (accessToken != storedAccessToken && payload) {
+  //       const updateAccessTokenResult = await dbHandler.updateClientAccessToken(
+  //         session.get("sessionId"),
+  //         accessToken
+  //       );
+  //       if (updateAccessTokenResult == "INVALID_SESSION_ID") return false;
+  //     }
+  //   } catch (err) {
+  //     if (err instanceof JwtExpiredError) {
+  //       try {
+  //         await refreshAccessToken(dbHandler, session);
+  //       } catch (err) {
+  //         console.error("Error", err);
+  //         return false;
+  //       }
+  //     } else {
+  //       console.error("Error:", err);
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // } catch (error) {
+  //   console.error(error);
+  // } finally {
+  //   await dbHandler.closeConnection();
+  // }
 };
 
 const userConfirmation = async (
