@@ -29,16 +29,18 @@ export default {
         "900": "900",
       },
       colors: {
-        primary: "#5E616E", // Dark Gray
-        secondary: "#C496FF", // Lavender Mist
-        primaryBg: "#430070", // Royal Purple
-        secondaryBg: "#9E61C7", // Amethyst Purple
-        softBg: "#FAEFFC", // Orchid Pink
-        grayCustom:"#626262" // Dark Gray
+        primary: "#5E616E", 
+        secondary: "#A97155",
+        primaryBg: "#7A133E",
+        secondaryBg: "#8B5C3C", 
+        softBg: "#FAEFFC", 
+        grayCustom:"#626262" 
       },
       backgroundImage: {
         "custom-gradient":
           "linear-gradient(to right, #6100a5, #8241aa, #b93499, #ec0677)",
+          "brown-blue-gradient": "linear-gradient(286deg, #B34B76 0%, #8CA4D6 100%)",
+          "blue-brown-gradient": "linear-gradient(286deg, #8CA4D6 0%, #B34B76 100%)"
       },
     },
     screens: {

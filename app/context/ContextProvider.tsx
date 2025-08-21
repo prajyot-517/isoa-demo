@@ -335,7 +335,7 @@ const initialValueForCreatePolicyData = {
           section_detail_code: "has_existing_business",
           attribute_value: null,
           attribute_type: "Yes_No",
-          attribute_name: "Do you currently have business insurance with MYOB?",
+          attribute_name: "Do you currently have business insurance with ISOA?",
         },
         {
           section_id: null,
@@ -456,7 +456,7 @@ const initialValueForCreatePolicyData = {
           attribute_value: null,
           attribute_type: "Yes_No",
           attribute_name:
-            "Are there any factors that you are currently aware of that may cause a loss or claim that may be covered under the MYOB Cyber Insurance policy you are applying for?",
+            "Are there any factors that you are currently aware of that may cause a loss or claim that may be covered under the ISOA Health Insurance policy you are applying for?",
         },
         {
           section_id: null,

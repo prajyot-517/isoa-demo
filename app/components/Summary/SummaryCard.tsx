@@ -81,7 +81,7 @@ const SummaryCard = ({
                   </svg>
                 </div>
                 <p className="ml-7 font-medium text-primaryBg">
-                MYOB Cyber Insurance can only be paid annually via credit card.
+                ISOA Health Insurance can only be paid annually via credit card.
                 </p>
               </div>
             </div>

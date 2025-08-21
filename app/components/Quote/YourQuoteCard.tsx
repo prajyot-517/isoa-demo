@@ -9,14 +9,14 @@ const YourQuoteCard = ({ quoteCardData }: any) => {
         <div className="flex flex-col space-y-3 text-xl sm:text-2xl w-full">
           <p className="break-words w-full">
             Your quote is valid until{" "}
-            <span className="text-[#FFD755]">{quoteCardData?.quote_expiration_date}</span>
+            <span className="text-secondary">{quoteCardData?.quote_expiration_date}</span>
           </p>
           <p className="break-words w-full">
             Prepared for{" "}
-            <span className="text-[#FFD755]">{quoteCardData?.insured_contact_email}</span>
+            <span className="text-secondary">{quoteCardData?.insured_contact_email}</span>
           </p>
           <p className="break-words w-full">
-            Quote number <span className="text-[#FFD755]">{quoteCardData?.quote_number}</span>
+            Quote number <span className="text-secondary">{quoteCardData?.quote_number}</span>
           </p>
         </div>
       </div>

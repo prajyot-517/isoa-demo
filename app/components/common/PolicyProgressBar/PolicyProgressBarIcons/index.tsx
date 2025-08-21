@@ -23,10 +23,10 @@ const PolicyProgressBarIcon: React.FC<PolicyProgressBarIconProps> = ({
             r="10"
             fill={`${
               currentStep === index + 1
-                ? "#9E61C7"
+                ? "#A97155"
                 : index + 1 < currentStep
                 ? "#B1B1B1"
-                : "#430070"
+                : "#6B3E26"
             }`}
           />
           <g clipPath="url(#clip0_10602_32817)">
@@ -74,10 +74,10 @@ const PolicyProgressBarIcon: React.FC<PolicyProgressBarIconProps> = ({
             r="10"
             fill={`${
               currentStep === index + 1
-                ? "#9E61C7"
+                ? "#A97155"
                 : index + 1 < currentStep
                 ? "#B1B1B1"
-                : "#430070"
+                : "#6B3E26"
             }`}
           />
           <path
@@ -101,10 +101,10 @@ const PolicyProgressBarIcon: React.FC<PolicyProgressBarIconProps> = ({
             r="10"
             fill={`${
               currentStep === index + 1
-                ? "#9E61C7"
+                ? "#A97155"
                 : index + 1 < currentStep
                 ? "#B1B1B1"
-                : "#430070"
+                : "#6B3E26"
             }`}
           />
           <path
@@ -358,10 +358,10 @@ const PolicyProgressBarIcon: React.FC<PolicyProgressBarIconProps> = ({
             r="10"
             fill={`${
               currentStep === index + 1
-                ? "#9E61C7"
+                ? "#A97155"
                 : index + 1 < currentStep
                 ? "#B1B1B1"
-                : "#430070"
+                : "#6B3E26"
             }`}
           />
           <path
@@ -541,10 +541,10 @@ const PolicyProgressBarIcon: React.FC<PolicyProgressBarIconProps> = ({
             r="10"
             fill={`${
               currentStep === index + 1
-                ? "#9E61C7"
+                ? "#A97155"
                 : index + 1 < currentStep
                 ? "#B1B1B1"
-                : "#430070"
+                : "#6B3E26"
             }`}
           />
           <path
@@ -595,10 +595,10 @@ const PolicyProgressBarIcon: React.FC<PolicyProgressBarIconProps> = ({
             r="10"
             fill={`${
               currentStep === index + 1
-                ? "#9E61C7"
+                ? "#A97155"
                 : index + 1 < currentStep
                 ? "#B1B1B1"
-                : "#430070"
+                : "#6B3E26"
             }`}
           />
           <path

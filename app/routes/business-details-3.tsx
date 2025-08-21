@@ -456,7 +456,7 @@ export default function BusinessDetailsStep3() {
                   {/* is existing business */}
                   <div className="flex flex-col space-y-3 md:flex-row md:justify-between md:space-y-0 md:space-x-4 xl:px-9 text-primary">
                     <p className="md:w-[512px] xl:max-w-3xl">
-                      Do you currently have business insurance with MYOB?
+                      Do you currently have business insurance with ISOA?
                     </p>
                     <div className="w-[289px] md:w-[335px]">
                       <ToggleButtonGroup

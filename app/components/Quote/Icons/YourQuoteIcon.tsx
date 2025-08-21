@@ -7,7 +7,7 @@ const YourQuoteIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="54.1461" cy="54.1461" r="54.1461" fill="#C496FF" />
+      <circle cx="54.1461" cy="54.1461" r="54.1461" fill="#A97155" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

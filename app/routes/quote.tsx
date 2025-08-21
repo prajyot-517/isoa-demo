@@ -564,7 +564,7 @@ const Quote = () => {
             </div>
           )}
 
-          <div className="flex justify-center bg-custom-gradient">
+          <div className="flex justify-center bg-[#B6E2FD]">
             <div className="max-w-[1536px] w-full">
               <div className=" sm:px-10 md:px-[2.25rem] lg:px-[2.5rem] xl:px-[4rem] 2xl:px-[6.25rem] 3xl:px-40">
                 <div className="flex py-20">
@@ -582,7 +582,7 @@ const Quote = () => {
                           upguardScore={quoteData?.upguard_score}
                           information={
                             <p className="ml-7 font-medium text-sm text-primaryBg">
-                              When you purchase an MYOB Cyber Insurance policy
+                              When you purchase an ISOA Health Insurance policy
                               you will be provided with an in-depth UpGuard
                               report that highlights those areas of
                               vulnerability cybercriminals may exploit and
@@ -625,13 +625,15 @@ const Quote = () => {
                         parentPolicy={
                           response?.data?.policies[0]?.parent_policy
                         }
+                        //  policyId={quoteId}
+                        // quoteId={quoteIdForEmailQuote}
                       />
                     )}
                   </div>
 
                   <div>
                     <div className="sm:px-14 text-primaryBg flex flex-col px-6 space-y-6">
-                      <div className="flex flex-row space-x-1 items-center">
+                      {/* <div className="flex flex-row space-x-1 items-center">
                         <p>Read more about policy wording</p>
                         <button
                           className="text-secondary cursor-pointer flex space-x-1 items-center"
@@ -640,7 +642,7 @@ const Quote = () => {
                           <span className="underline"> here</span>{" "}
                           <ViewLinkIcon />
                         </button>
-                      </div>
+                      </div> */}
                       <div className="flex">
                         <div className="flex space-x-2">
                           <div className="-mt-[2px]">
@@ -660,11 +662,11 @@ const Quote = () => {
                             </svg>
                           </div>
                           <p className="ml-7 font-medium text-primaryBg">
-                          MYOB Cyber Insurance can only be paid annually via
+                          ISOA Helath Insurance can only be paid annually via
                             credit card.
                             <br />
                             <br />
-                            As our MYOB Cyber Insurance policy does not renew
+                            As our ISOA Helath Insurance policy does not renew
                             automatically you will receive a notification from
                             us at least one month before the end date of your
                             policy. This notification will be sent to the email

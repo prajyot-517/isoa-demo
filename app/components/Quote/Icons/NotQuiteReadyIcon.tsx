@@ -7,7 +7,7 @@ const NotQuiteReadyIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="27.5625" cy="27.5625" r="27.5625" fill="#C496FF" />
+      <circle cx="27.5625" cy="27.5625" r="27.5625" fill="#A97155" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

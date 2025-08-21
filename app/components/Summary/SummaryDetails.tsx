@@ -204,7 +204,7 @@ const SummaryDetails: React.FC<props> = ({
                     </svg>
                   </div>
                   <p className="ml-7 font-medium">
-                    MYOB Cyber Insurance can only be paid annually via credit
+                    ISOA Health Insurance can only be paid annually via credit
                     card.
                   </p>
                 </div>
@@ -356,7 +356,7 @@ const SummaryDetails: React.FC<props> = ({
           <div className="flex flex-col space-y-4">
             <p className="font-bold">
               Are there any factors that you are currently aware of that may
-              cause a loss or claim that may be covered under the MYOB Cyber
+              cause a loss or claim that may be covered under the ISOA Health
               Insurance policy you are applying for?
             </p>
             <p>{capitalizeFirstLetter(lossHistory?.has_loss_factors)}</p>
@@ -606,7 +606,7 @@ const SummaryDetails: React.FC<props> = ({
         <div className="p-8 text-primaryBg  flex flex-col space-y-6">
           <div className="flex flex-col space-y-4">
             <p className="font-bold">
-              Do you currently have business insurance with MYOB?{" "}
+              Do you currently have business insurance with ISOA?{" "}
               <span className="text-secondaryBg">(non editable)</span>
             </p>
 

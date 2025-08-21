@@ -19,7 +19,7 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
 
   const steps = [
     {
-      name: "Business Details",
+      name: "Question Details",
       liStyle: `${
         currentStep === 1 ? "flex" : "hidden"
       } relative cursor-default md:flex`,
@@ -28,7 +28,7 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
       nameStyle: "",
     },
     {
-      name: "Your Quote",
+      name: "Policy Holder Contact Details",
       liStyle: `${
         currentStep === 2
           ? "flex"
@@ -44,7 +44,7 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
       nameStyle: "",
     },
     {
-      name: "Policy Holder Contact Details",
+      name: "Your Quote",
       liStyle: `${
         currentStep === 3
           ? "flex"
@@ -229,7 +229,7 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
               }`}
               style={{ width: elementOffset }}
             ></div>
-            <div
+            {/* <div
               className={`flex-grow  ${
                 currentStep === 1 ? "flex bg-[#b1b1b1]" : "hidden"
               }`}
@@ -243,7 +243,7 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
               className={`flex-grow ${
                 currentStep === 1 ? "bg-[#b1b1b1]" : ""
               } flex`}
-            ></div>
+            ></div> */}
           </div>
           <div
             className={`${

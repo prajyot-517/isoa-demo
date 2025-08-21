@@ -6,8 +6,8 @@ import { useAppContext } from "~/context/ContextProvider";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "MYOB Portal" },
-    { name: "description", content: "Welcome to MYOB Portal!" },
+    { title: "ISOA Portal" },
+    { name: "description", content: "Welcome to ISOA Portal!" },
   ];
 };
 
@@ -33,7 +33,7 @@ export default function Index() {
     <div>
       {showComponent && (
         <div className="flex flex-col justify-center items-center mt-16">
-          <Loading />
+          {/* <Loading /> */}
 
           <div className="flex gap-2 mt-12">
             <div className="h-4 w-4 sm:h-6 sm:w-6 md:h-[1.625rem] md:w-[1.625rem] bg-secondaryBg rounded-full animate-loader" />
