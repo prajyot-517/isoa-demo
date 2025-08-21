@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+}
+
+@font-face {
+  font-family: 'Museo Sans Rounded';
+  src: url('/fonts/MuseoSansRounded100.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Museo Sans Rounded';
+  src: url('/fonts/MuseoSansRounded300.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Museo Sans Rounded';
+  src: url('/fonts/MuseoSansRounded500.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Museo Sans Rounded';
+  src: url('/fonts/MuseoSansRounded700.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Museo Sans Rounded';
+  src: url('/fonts/MuseoSansRounded900.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+input::placeholder {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
