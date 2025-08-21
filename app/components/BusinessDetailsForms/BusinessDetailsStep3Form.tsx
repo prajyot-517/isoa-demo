@@ -69,13 +69,13 @@ const BusinessDetailsStep3Form: React.FC<props> = ({
                   )}
               </div>
             </Form>
-            <InformationCard
+            {/* <InformationCard
               title="Why do I need to verify my email?"
               body="Your security is important to us. This allows us to verify your email address and authenticate your identity each time you login.
                 We will also use this email to send you any important documents and updates about your policy. "
               iconColor="#5841BF"
               backgroundColor="#FAEFFC"
-            />
+            /> */}
           </div>
         </div>
      

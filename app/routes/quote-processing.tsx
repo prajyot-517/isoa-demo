@@ -44,13 +44,13 @@ import { processPhoneNumber, removeCommas } from "~/utils";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("cookie"));
-  if (!(await verifyAuthToken(session))) {
-    return redirect("/", {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-    });
-  }
+  // if (!(await verifyAuthToken(session))) {
+  //   return redirect("/", {
+  //     headers: {
+  //       "Set-Cookie": await destroySession(session),
+  //     },
+  //   });
+  // }
 
   return json(
     {},
@@ -374,13 +374,13 @@ export default QuoteProcessing;
 
 export async function action({ request }: ActionFunctionArgs) {
   const session = await getSession(request.headers.get("cookie"));
-  if (!(await verifyAuthToken(session))) {
-    return redirect("/login", {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-    });
-  }
+  // if (!(await verifyAuthToken(session))) {
+  //   return redirect("/login", {
+  //     headers: {
+  //       "Set-Cookie": await destroySession(session),
+  //     },
+  //   });
+  // }
 
   const resData = await getActivePolicyOrQuote(session);
   if (resData?.data?.policies?.length > 0) {

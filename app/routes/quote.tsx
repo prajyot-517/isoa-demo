@@ -67,13 +67,13 @@ type AttributeValue = boolean | null;
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("cookie"));
-  if (!(await verifyAuthToken(session))) {
-    return redirect("/login", {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-    });
-  }
+  // if (!(await verifyAuthToken(session))) {
+  //   return redirect("/login", {
+  //     headers: {
+  //       "Set-Cookie": await destroySession(session),
+  //     },
+  //   });
+  // }
 
   session.unset("username");
   session.unset("isExistingUser");
@@ -786,13 +786,13 @@ export default Quote;
 
 export async function action({ request }: ActionFunctionArgs) {
   const session = await getSession(request.headers.get("cookie"));
-  if (!(await verifyAuthToken(session))) {
-    return redirect("/login", {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-    });
-  }
+  // if (!(await verifyAuthToken(session))) {
+  //   return redirect("/login", {
+  //     headers: {
+  //       "Set-Cookie": await destroySession(session),
+  //     },
+  //   });
+  // }
   const formData = await request.formData();
 
   // Extract the query parameter 'quoteId' from the request URL

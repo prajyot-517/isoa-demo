@@ -431,13 +431,13 @@ export async function action({ request }: ActionFunctionArgs) {
     const isResendOtp = formData.get("isResendOtp") === "true";
 
     if (session.has("accessToken")) {
-      if (!(await verifyAuthToken(session))) {
-        return redirect("/login", {
-          headers: {
-            "Set-Cookie": await destroySession(session),
-          },
-        });
-      }
+      // if (!(await verifyAuthToken(session))) {
+      //   return redirect("/login", {
+      //     headers: {
+      //       "Set-Cookie": await destroySession(session),
+      //     },
+      //   });
+      // }
       if (isResendOtp) {
         const generatePhoneOTPResponse = await generatePhoneOTP(session);
         if (generatePhoneOTPResponse == OTP_LIMIT_REACHED) {
