@@ -109,10 +109,15 @@ export default function BusinessDetailsStep1() {
         (section: any) => section.section_code == INFO_SECURITY_MEASURES
       );
 
-      const newBusinessDetails = {
-        insured_industry: data?.insured_industry || "",
+      
 
-        industry_name: data?.industry_name || "",
+      const newBusinessDetails = {
+        
+        visa_status: data?.visa_status || "",
+
+        school: data?.school || "",
+
+        age: data?.age || "",
 
         num_employees:
           infoSecurity?.section_details.find(
@@ -177,16 +182,25 @@ export default function BusinessDetailsStep1() {
     // } else {
     //   setNextButtonDisabled(true);
     // }
-    setNextButtonDisabled(
-      !(
-        businessDetails?.insured_industry?.length > 0 &&
-        businessDetails?.industry_name?.length > 0 &&
-        businessDetails?.num_employees?.length > 0 &&
-        (businessDetails?.has_50PCT_overseas_revenue === "no"
-          ? businessDetails?.description?.length > 0
-          : true)
-      )
-    );
+    // setNextButtonDisabled(
+    //   !(
+    //     businessDetails?.visa_status?.length > 0 &&
+    //     businessDetails?.school?.length > 0 &&
+    //     businessDetails?.age?.length > 0 &&
+    //     (businessDetails?.has_50PCT_overseas_revenue === "no"
+    //       ? businessDetails?.description?.length > 0
+    //       : true)
+    //   )
+    // );
+    const isValid =
+    businessDetails?.visa_status?.length > 0 &&
+    businessDetails?.school?.length > 0 &&
+    businessDetails?.age?.length > 0 &&
+    businessDetails?.waive_out?.length > 0 &&
+    (businessDetails?.waive_out !== "no" ||
+      businessDetails?.description?.length > 0);
+ 
+  setNextButtonDisabled(!isValid);
   }, [businessDetails]);
 
   useEffect(() => {
@@ -332,7 +346,7 @@ export default function BusinessDetailsStep1() {
 
   const handleToggleChange = (name: any, value: string) => {
     setBusinessDetails((data: any) => {
-      if (name === "has_50PCT_overseas_revenue") {
+      if (name === "waive_out") {
       return {
         ...data,
         [name]: value,
@@ -360,8 +374,8 @@ export default function BusinessDetailsStep1() {
     }
 
     const formData = new FormData();
-    formData.append("insured_industry", businessDetails?.insured_industry);
-    formData.append("num_employees", businessDetails?.num_employees);
+    formData.append("visa_status", businessDetails?.visa_status);
+    formData.append("age", businessDetails?.age);
     // formData.append(
     //   "total_annual_revenue",
     //   removeCommas(businessDetails?.total_annual_revenue)
@@ -372,12 +386,12 @@ export default function BusinessDetailsStep1() {
     //   removeCommas(businessDetails?.total_revenue_online)
     // );
     formData.append(
-      "industry_name",
-      businessDetails?.industry_name
+      "school",
+      businessDetails?.school
     );
     formData.append(
-      "has_50PCT_overseas_revenue",
-      businessDetails?.has_50PCT_overseas_revenue
+      "waive_out",
+      businessDetails?.waive_out
     );
     formData.append(
       "description",
@@ -622,10 +636,10 @@ export default function BusinessDetailsStep1() {
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const num_employees = formData.get("num_employees");
-  const insured_industry: any = formData.get("insured_industry");
-  const industry_name=formData.get("insured_name");
-  const has_50PCT_overseas_revenue = formData.get("has_50PCT_overseas_revenue");
+  const age = formData.get("age");
+  const visa_status: any = formData.get("visa_status");
+  const school=formData.get("school");
+  const waive_out = formData.get("waive_out");
   const description = formData.get("description");
   const total_annual_revenue = formData.get("total_annual_revenue");
   const has_online_revenue = formData.get("has_online_revenue");
@@ -637,8 +651,9 @@ export async function action({ request }: ActionFunctionArgs) {
   let response;
 
   const insuredRevenueData: any = {
-    has_50PCT_overseas_revenue,
-    industry_name,
+    // has_50PCT_overseas_revenue,
+    // age,
+    school,
     total_annual_revenue,
     has_online_revenue,
     total_revenue_online,
@@ -646,7 +661,7 @@ export async function action({ request }: ActionFunctionArgs) {
   };
 
   const infoSecurityData: any = {
-    num_employees,
+    age,
   };
 
   if (isOccupationSearch) {
@@ -692,7 +707,8 @@ export async function action({ request }: ActionFunctionArgs) {
     // }
     const responseData: any = formData.get("response");
     response = JSON.parse(responseData);
-    response = { ...response, insured_industry };
+    
+    response = { ...response, visa_status };
     let section = response?.sections?.find(
       (section: any) => section.section_code == REVENUE_DETAILS
     );

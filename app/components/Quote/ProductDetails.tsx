@@ -14,6 +14,7 @@ import CheckBoxToogle from "../common/CheckBoxToggle";
 import { formatAmount } from "~/utils";
 import { BI_TIME_ACCESS_TOOLTIP } from "~/constants/string";
 import Pill from "../common/Pill";
+import PlanCard from "../PlanCard";
 
 interface OptionalExtensionState {
   isEnabled: boolean | null;
@@ -22,6 +23,8 @@ interface OptionalExtensionState {
 }
 
 interface ProductDetailsProps {
+  policyId:any;
+  quoteId:any;
   quoteOptions: any;
   handleQuoteOptionSelect: (option: any) => void;
   setOptionalExtensionForQuote1: (data: any) => void;
@@ -37,6 +40,8 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({
+  policyId,
+  quoteId,
   quoteOptions,
   handleQuoteOptionSelect,
   setOptionalExtensionForQuote1,
@@ -56,6 +61,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   const [product, setProduct] = useState("");
   const [quoteOptions1, setQuoteOptions1] = useState<any>({});
   const [quoteOptions2, setQuoteOptions2] = useState<any>({});
+  const[plans,setPlans]=useState([]);
 
   const scrollRef = useRef(null);
   const tableRef = useRef(null);
@@ -73,8 +79,64 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   };
 
   useEffect(() => {
+    const transformedPlans = quoteOptions.map((q, idx) => ({
+      id: q.quote_option_id,
+      name: q.plan_display_name,
+      price: `$${q.total_payable.toFixed(2)}`,
+      priceNote: "per month",
+      bgColor:
+        idx === 0 ? "bg-gray-50" : idx === 1 ? "bg-blue-50" : "bg-orange-50",
+      borderColor:
+        idx === 0
+          ? "border-gray-200"
+          : idx === 1
+          ? "border-blue-200"
+          : "border-orange-200",
+      buttonColor: "bg-purple-800 hover:bg-purple-900",
+      features: [
+          { text: "Annual maximum", value: "Unlimited", visible: true },
+          {
+            text: "Per injury/sickness maximum",
+            value: `$${q.standard_coverage}`,
+            visible: true,
+          },
+          {
+            text: "Annual deductible in-network",
+            value: `$${q.standard_excess}`,
+            visible: true,
+          },
+          {
+            text: "Annual deductible out-of-network - $400",
+            value: "",
+            visible: false,
+          },
+          { text: "Copay Student Health Center - $15", value: "", visible: false },
+          { text: "Copay primary care physician - $30", value: "", visible: false },
+          { text: "Coinsurance in-network - 80%", value: "", visible: false },
+          { text: "Immunization & preventive care - $200", value: "", visible: false },
+          { text: "Medical evacuation - Unlimited", value: "", visible: false },
+          { text: "Repatriation of remains - Unlimited", value: "", visible: false },
+          { text: "Provider network - Aetna PPO", value: "", visible: false },
+        ],
+      quote_option_id_for_bind: q.quote_option_id,
+      quote_id_for_bind: quoteId,
+      policy_id: policyId
+    }));
+
+    setPlans(transformedPlans);
+  }, []);
+
+  // quoteOptions, quoteId, policyId
+
+  useEffect(() => {
     handleScrollToTable(quoteOptions1?.plan_display_name);
   }, [quoteOptions]);
+
+//   useEffect(() => {
+//   if (quoteOptions1?.plan_display_name) {
+//     handleScrollToTable(quoteOptions1.plan_display_name);
+//   }
+// }, [quoteOptions1?.plan_display_name]);
 
   useEffect(() => {
     return () => {
@@ -259,7 +321,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
         <div className=" bg-[#F5F5F5] py-7 md:px-14 px-6">
           <h1 className="font-bold text-[1.75rem]">Product Details</h1>
         </div>
-        <div className="px-14 pt-12 lg:pt-14">
+        {/* <div className="px-14 pt-12 lg:pt-14">
           <div className="overflow-x-auto" ref={tableRef}>
             <table
               className="min-w-full leading-normal hidden md:block"
@@ -787,10 +849,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
 
         {/* -------------------------------------------Table view from 360px to 1154px-------------------------------------------------- */}
-        <div className="flex flex-col space-y-12 px-5 sm:px-9 md:hidden">
+        {/* <div className="flex flex-col space-y-12 px-5 sm:px-9 md:hidden">
           <div className="flex flex-col space-y-12">
             <div className="flex flex-col space-y-4">
               <div>
@@ -1432,7 +1494,18 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
               </table>
             )}
           </div>
+        </div> */}
+
+        <div className="min-h-screen bg-gray-100 py-8 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-6">
+              {plans?.map((plan) => (
+                <PlanCard plan={plan} />
+              ))}
+            </div>
+          </div>
         </div>
+
       </div>
 
       {openEditModal && (

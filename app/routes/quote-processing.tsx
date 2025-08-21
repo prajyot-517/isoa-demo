@@ -129,105 +129,153 @@ const QuoteProcessing = () => {
     };
   }, []);
 
+  // function for createPolicyData values
+  function updateSectionDetailsWithUserValues(
+    createPolicyData: any,
+    businessDetails: any
+  ) {
+    // 🔹 Map field keys → user values
+    const valueMap: Record<string, any> = {
+      visa_status: businessDetails?.visa_status,
+      school: businessDetails?.school,
+      age: businessDetails?.age,
+      waive_out: businessDetails?.waive_out,
+      description: businessDetails?.description,
+    };
+
+    // 🔹 Loop through each section and section_detail
+    createPolicyData.sections = createPolicyData.sections.map(
+      (section: any) => {
+        return {
+          ...section,
+          section_details: section?.section_details?.map((detail: any) => {
+            if (valueMap.hasOwnProperty(detail.section_detail_code)) {
+              return {
+                ...detail,
+                attribute_value: valueMap[detail.section_detail_code],
+              };
+            }
+            return detail;
+          }),
+        };
+      }
+    );
+
+    return createPolicyData;
+  }
+
   // Function to save data and move to next step
   const handleSaveAndNextButton = () => {
+
+    let updatedCreatePolicyData = updateSectionDetailsWithUserValues(
+      createPolicyData,
+      businessDetails,
+    );
+
     const formData = new FormData();
 
-    formData.append("has_claim_issue", businessDetails2?.has_claim_issue);
-    formData.append("has_loss_factors", businessDetails2?.has_loss_factors);
-    formData.append(
-      "	has_loss_factors_details",
-      businessDetails2?.has_loss_factors_details
-    );
-    formData.append("num_customers", businessDetails2?.num_customers);
-    formData.append("sensitive_data", businessDetails2?.sensitive_data);
+    // formData.append("has_claim_issue", businessDetails2?.has_claim_issue);
+    // formData.append("has_loss_factors", businessDetails2?.has_loss_factors);
+    // formData.append(
+    //   "	has_loss_factors_details",
+    //   businessDetails2?.has_loss_factors_details
+    // );
+    // formData.append("num_customers", businessDetails2?.num_customers);
+    // formData.append("sensitive_data", businessDetails2?.sensitive_data);
+
+    // formData.append(
+    //   "sensitive_data_none_details",
+    //   businessDetails2?.sensitive_data_none_details
+    // );
+    // formData.append(
+    //   "has_malware_protection",
+    //   businessDetails2?.has_malware_protection
+    // );
+    // formData.append(
+    //   "has_regular_backups",
+    //   businessDetails2?.has_regular_backups
+    // );
+    // formData.append(
+    //   "has_software_patches",
+    //   businessDetails2?.has_software_patches
+    // );
+    // formData.append(
+    //   "has_computer_crime_cover",
+    //   businessDetails2?.has_computer_crime_cover
+    // );
+    // formData.append(
+    //   "has_segregated_duties_payments",
+    //   businessDetails2?.has_segregated_duties_payments
+    // );
+    // formData.append(
+    //   "has_segregated_duties_expense",
+    //   businessDetails2?.has_segregated_duties_expense
+    // );
+    // formData.append(
+    //   "has_segregated_duties_fund_txns",
+    //   businessDetails2?.has_segregated_duties_fund_txns
+    // );
+    // formData.append("has_auth_limits_1K", businessDetails2?.has_auth_limits_1K);
+    // formData.append(
+    //   "has_social_engg_fraud_ext",
+    //   businessDetails2?.has_social_engg_fraud_ext
+    // );
+    // formData.append(
+    //   "has_approved_vendors",
+    //   businessDetails2?.has_approved_vendors
+    // );
+    // formData.append(
+    //   "has_verified_destination_bank",
+    //   businessDetails2?.has_verified_destination_bank
+    // );
+    // formData.append(
+    //   "insured_company_url",
+    //   businessDetails2?.insured_company_url
+    // );
+    // formData.append(
+    //   "insured_company_url_blacklisted",
+    //   businessDetails2?.insured_company_url_blacklisted
+    // );
+    // formData.append(
+    //   "confirm_basic_cover_blacklisted_url",
+    //   businessDetails2?.confirm_basic_cover_blacklisted_url
+    // );
+    // formData.append(
+    //   "confirm_basic_cover_nourl",
+    //   businessDetails2?.confirm_basic_cover_nourl
+    // );
+    // formData.append("insured_industry", businessDetails?.insured_industry);
+    // formData.append("num_employees", businessDetails?.num_employees);
+
+    // formData.append(
+    //   "total_annual_revenue",
+    //   removeCommas(businessDetails?.total_annual_revenue)
+    // );
+    // formData.append("has_online_revenue", businessDetails?.has_online_revenue);
+    // formData.append(
+    //   "total_revenue_online",
+    //   removeCommas(businessDetails?.total_revenue_online)
+    // );
+
+    formData.append("visa_status", businessDetails?.visa_status);
+
+    formData.append("school", businessDetails?.school);
+
+    formData.append("age", businessDetails?.age);
 
     formData.append(
-      "sensitive_data_none_details",
-      businessDetails2?.sensitive_data_none_details
+      "waive_out",
+      businessDetails?.waive_out
     );
-    formData.append(
-      "has_malware_protection",
-      businessDetails2?.has_malware_protection
-    );
-    formData.append(
-      "has_regular_backups",
-      businessDetails2?.has_regular_backups
-    );
-    formData.append(
-      "has_software_patches",
-      businessDetails2?.has_software_patches
-    );
-    formData.append(
-      "has_computer_crime_cover",
-      businessDetails2?.has_computer_crime_cover
-    );
-    formData.append(
-      "has_segregated_duties_payments",
-      businessDetails2?.has_segregated_duties_payments
-    );
-    formData.append(
-      "has_segregated_duties_expense",
-      businessDetails2?.has_segregated_duties_expense
-    );
-    formData.append(
-      "has_segregated_duties_fund_txns",
-      businessDetails2?.has_segregated_duties_fund_txns
-    );
-    formData.append("has_auth_limits_1K", businessDetails2?.has_auth_limits_1K);
-    formData.append(
-      "has_social_engg_fraud_ext",
-      businessDetails2?.has_social_engg_fraud_ext
-    );
-    formData.append(
-      "has_approved_vendors",
-      businessDetails2?.has_approved_vendors
-    );
-    formData.append(
-      "has_verified_destination_bank",
-      businessDetails2?.has_verified_destination_bank
-    );
-    formData.append(
-      "insured_company_url",
-      businessDetails2?.insured_company_url
-    );
-    formData.append(
-      "insured_company_url_blacklisted",
-      businessDetails2?.insured_company_url_blacklisted
-    );
-    formData.append(
-      "confirm_basic_cover_blacklisted_url",
-      businessDetails2?.confirm_basic_cover_blacklisted_url
-    );
-    formData.append(
-      "confirm_basic_cover_nourl",
-      businessDetails2?.confirm_basic_cover_nourl
-    );
-    formData.append("insured_industry", businessDetails?.insured_industry);
-    formData.append("num_employees", businessDetails?.num_employees);
 
     formData.append(
-      "total_annual_revenue",
-      removeCommas(businessDetails?.total_annual_revenue)
+      "description",
+      businessDetails?.description
     );
-    formData.append("has_online_revenue", businessDetails?.has_online_revenue);
-    formData.append(
-      "total_revenue_online",
-      removeCommas(businessDetails?.total_revenue_online)
-    );
-    formData.append(
-      "has_50PCT_overseas_revenue",
-      businessDetails?.has_50PCT_overseas_revenue
-    );
+
     formData.append(
       "insured_contact_name",
       contactDetails?.insured_contact_name
-    );
-    formData.append(
-      "insured_contact_phone",
-      `${countryCodeForPhoneInitialStep}${processPhoneNumber(
-        contactDetails?.insured_contact_phone
-      )}`
     );
 
     formData.append(
@@ -235,24 +283,34 @@ const QuoteProcessing = () => {
       businessDetails3?.insured_contact_email
     );
 
-    formData.append(
-      "has_existing_business",
-      businessDetails3?.has_existing_business
-    );
+    // formData.append(
+    //   "insured_contact_phone",
+    //   `${countryCodeForPhoneInitialStep}${processPhoneNumber(
+    //     contactDetails?.insured_contact_phone
+    //   )}`
+    // );
 
-    formData.append(
-      "existing_policy_number",
-      businessDetails3?.existing_policy_number
-    );
+    // formData.append(
+    //   "has_existing_business",
+    //   businessDetails3?.has_existing_business
+    // );
 
-    formData.append("referral_code", businessDetails3?.referral_code);
+    // formData.append(
+    //   "existing_policy_number",
+    //   businessDetails3?.existing_policy_number
+    // );
 
-    formData.append("contact_consent", businessDetails3?.contact_consent);
+    // formData.append("referral_code", businessDetails3?.referral_code);
 
-    formData.append(
-      "createPolicyData",
-      JSON.stringify(createPolicyData, null, 2)
-    );
+    // formData.append("contact_consent", businessDetails3?.contact_consent);
+
+    // formData.append(
+    //   "createPolicyData",
+    //   JSON.stringify(createPolicyData, null, 2)
+    // );
+
+    formData.append("createPolicyData", JSON.stringify(updatedCreatePolicyData, null, 2))
+
     formData.append("isCreate", "true");
 
     formData.append("isSaveAndNext", "true");
@@ -325,7 +383,7 @@ const QuoteProcessing = () => {
               </span>{" "}
               or give us a call on
               <br />
-              <span className="text-secondary"> 1300 555 123</span> (Mon-Fri
+              <span className="text-secondary"> (800) 244-1180</span> (Mon-Fri
               9am-5pm)
             </p>
           </div>
@@ -382,23 +440,32 @@ export async function action({ request }: ActionFunctionArgs) {
   //   });
   // }
 
-  const resData = await getActivePolicyOrQuote(session);
-  if (resData?.data?.policies?.length > 0) {
-    const activeQuote = resData?.data?.policies?.find((policy: any) => {
-      return (
-        policy.policy_stage?.toLowerCase() === QUOTED &&
-        (policy.policy_type?.toLowerCase() === NEW ||
-          policy.policy_type?.toLowerCase() === RENEWAL)
-      );
-    });
-    if (activeQuote) {
-      return redirect(`/quote?quoteId=${activeQuote?.policy_id}`, {
-        headers: {
-          "Set-Cookie": await commitSession(session),
-        },
-      });
-    }
-  }
+
+
+
+// @Add todo
+
+
+  // const resData = await getActivePolicyOrQuote(session);
+  // if (resData?.data?.policies?.length > 0) {
+  //   const activeQuote = resData?.data?.policies?.find((policy: any) => {
+  //     return (
+  //       policy.policy_stage?.toLowerCase() === QUOTED &&
+  //       (policy.policy_type?.toLowerCase() === NEW ||
+  //         policy.policy_type?.toLowerCase() === RENEWAL)
+  //     );
+  //   });
+  //   if (activeQuote) {
+  //     return redirect(`/quote?quoteId=${activeQuote?.policy_id}`, {
+  //       headers: {
+  //         "Set-Cookie": await commitSession(session),
+  //       },
+  //     });
+  //   }
+  // }
+
+
+
 
   try {
     const formData = await request.formData();

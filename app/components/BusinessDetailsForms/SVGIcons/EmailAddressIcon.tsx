@@ -7,7 +7,7 @@ const EmailAddressIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="22.3438" cy="21.6562" r="21.6562" fill="#C496FF" />
+      <circle cx="22.3438" cy="21.6562" r="21.6562" fill="#A97155" />
       <path
         d="M22 10.3125L8.9375 19.5263V35.0625H35.0625V19.5263L22 10.3125V10.3125Z"
         fill="white"

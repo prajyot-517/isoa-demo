@@ -12,14 +12,14 @@ type StepState = {
 };
 
 type BusinessDetails = {
-  insured_industry: string;
-  industry_name: string;
-  num_employees: string;
+  visa_status: string;
+  school: string;
+  age: string;
   total_annual_revenue: string;
   has_online_revenue: string;
   total_revenue_online: string;
   insured_contact_email: string;
-  has_50PCT_overseas_revenue: string;
+  waive_out: string;
   description:string;
 };
 
@@ -133,7 +133,7 @@ interface CreatePolicyData {
   net_premium: number | null;
   last_modified_date: Date | null;
   insured_trading_name: string | null;
-  insured_industry: string | null;
+  visa_status: string | null;
   insured_contact_phone: string | null;
   insured_contact_name: string | null;
   insured_contact_email: string | null;
@@ -229,13 +229,13 @@ const initialValueForStepState = {
 
 const initialValueForBusinessDetails = {
   insured_contact_email: "",
-  insured_industry: "",
-  industry_name: "",
-  num_employees: "",
+  visa_status: "",
+  school: "",
+  age: "",
   total_annual_revenue: "",
   has_online_revenue: "no",
   total_revenue_online: "",
-  has_50PCT_overseas_revenue: "",
+  waive_out: "",
   description:"",
 };
 
@@ -322,26 +322,53 @@ const initialValueForCreatePolicyData = {
   stamp_duty: null,
   sections: [
     {
-      section_name: "Business details",
-      section_code: "business_details",
-      section_index: 90,
+      section_name: "ISOA details",
+      section_code: "isoa_details",
+      section_index: 100,
       section_id: null,
       policy_id: null,
       section_details: [
         {
           section_id: null,
-          section_detail_index: 91,
+          section_detail_index: 110,
           section_detail_id: null,
-          section_detail_code: "has_existing_business",
+          section_detail_code: "visa_status",
+          attribute_value: null,
+          attribute_type: "Text",
+          attribute_name: "Visa Status",
+        },
+        {
+          section_id: null,
+          section_detail_index: 120,
+          section_detail_id: null,
+          section_detail_code: "school",
+          attribute_value: null,
+          attribute_type: "Text",
+          attribute_name: "School",
+        },
+        {
+          section_id: null,
+          section_detail_index: 130,
+          section_detail_id: null,
+          section_detail_code: "age",
+          attribute_value: null,
+          attribute_type: "Text",
+          attribute_name: "Age",
+        },
+        {
+          section_id: null,
+          section_detail_index: 140,
+          section_detail_id: null,
+          section_detail_code: "waive_out",
           attribute_value: null,
           attribute_type: "Yes_No",
           attribute_name: "Do you currently have business insurance with ISOA?",
         },
         {
           section_id: null,
-          section_detail_index: 92,
+          section_detail_index: 150,
           section_detail_id: null,
-          section_detail_code: "existing_policy_number",
+          section_detail_code: "description",
           attribute_value: null,
           attribute_type: "Text",
           attribute_name: "What is your existing Business policy number?",
@@ -349,333 +376,333 @@ const initialValueForCreatePolicyData = {
       ],
     },
 
-    {
-      section_name: "Revenue details",
-      section_index: 100,
-      section_id: null,
-      section_details: [
-        {
-          section_id: null,
-          section_detail_index: 110,
-          section_detail_id: null,
-          section_detail_code: "total_annual_revenue",
-          attribute_value: null,
-          attribute_type: "Currency",
-          attribute_name: "What is your customer’s total annual revenue?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 120,
-          section_detail_id: null,
-          section_detail_code: "has_online_revenue",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name: "Is any amount generated from online activities?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 130,
-          section_detail_id: null,
-          section_detail_code: "total_revenue_online",
-          attribute_value: null,
-          attribute_type: "Currency",
-          attribute_name:
-            "Of the total revenue above, how much was generated from online activities? (optional)",
-        },
-        {
-          section_id: null,
-          section_detail_index: 140,
-          section_detail_id: null,
-          section_detail_code: "has_50PCT_overseas_revenue",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name: "Is more than 50% derived from overseas?",
-        },
-      ],
-      section_code: "revenue_details",
-      policy_id: null,
-    },
-    {
-      section_name: "Data & Compliance",
-      section_index: 200,
-      section_id: null,
-      section_details: [
-        {
-          section_id: null,
-          section_detail_index: 210,
-          section_detail_id: null,
-          section_detail_code: "num_customers",
-          attribute_value: null,
-          attribute_type: "Number",
-          attribute_name:
-            "How many customers does your business have that you use, store, disclose or collect information from.",
-        },
-        {
-          section_id: null,
-          section_detail_index: 220,
-          section_detail_id: null,
-          section_detail_code: "sensitive_data",
-          attribute_value: null,
-          attribute_type: "MultiSelect Picklist",
-          attribute_name:
-            "Does your business collect, store, disclose or use any of the following categories of data?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 230,
-          section_detail_id: null,
-          section_detail_code: "sensitive_data_none_details",
-          attribute_value: null,
-          attribute_type: "Text",
-          attribute_name: "Please provide more details",
-        },
-      ],
-      section_code: "data_compliance",
-      policy_id: null,
-    },
-    {
-      section_name: "Loss History",
-      section_index: 300,
-      section_id: null,
-      section_details: [
-        {
-          section_id: null,
-          section_detail_index: 310,
-          section_detail_id: null,
-          section_detail_code: "has_claim_issue",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "In the past three years, have you or any of your company's subsidiaries had any incidents, unplanned business interruptions, claims or legal actions involving unauthorised access or misuse of your network that cost more than $5,000?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 320,
-          section_detail_id: null,
-          section_detail_code: "has_loss_factors",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Are there any factors that you are currently aware of that may cause a loss or claim that may be covered under the ISOA Health Insurance policy you are applying for?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 330,
-          section_detail_id: null,
-          section_detail_code: "has_loss_factors_details",
-          attribute_value: null,
-          attribute_type: "Text",
-          attribute_name: "Please provide more details",
-        },
-      ],
-      section_code: "loss_history",
-      policy_id: null,
-    },
-    {
-      section_name: "Info security measures",
-      section_index: 400,
-      section_id: null,
-      section_details: [
-        {
-          section_id: null,
-          section_detail_index: 410,
-          section_detail_id: null,
-          section_detail_code: "num_employees",
-          attribute_value: null,
-          attribute_type: "Number",
-          attribute_name: "How many staff does the company currently have?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 420,
-          section_detail_id: null,
-          section_detail_code: "has_cyber_training",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Does the Insured provide training or education to employees to increase cyber security awareness and phishing resilience at least annually?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 430,
-          section_detail_id: null,
-          section_detail_code: "has_qualified_it_team",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Does your business have qualified personnel assigned to manage and secure IT systems?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 440,
-          section_detail_id: null,
-          section_detail_code: "has_password_policy",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Does your business enforce a password policy requiring strong and unique passwords for all accounts and devices operating?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 450,
-          section_detail_id: null,
-          section_detail_code: "has_two_factor_auth",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Does your business enforce implementation of two-factor authentication for all accounts where available?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 460,
-          section_detail_id: null,
-          section_detail_code: "has_malware_protection",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Do you use anti-malware protection for all your devices such as workstations, servers, laptops and any other applicable systems?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 470,
-          section_detail_id: null,
-          section_detail_code: "has_regular_backups",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Do you perform regular backups of all your business critical data and store one copy off-site?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 480,
-          section_detail_id: null,
-          section_detail_code: "has_software_patches",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Do you apply updates and patches to software, operating systems and applications including anti-malware protection?",
-        },
-      ],
-      section_code: "info_security_measures",
-      policy_id: null,
-    },
-    {
-      section_name: "Optional Extensions",
-      section_index: 500,
-      section_id: null,
-      section_details: [
-        {
-          section_id: null,
-          section_detail_index: 510,
-          section_detail_id: null,
-          section_detail_code: "has_computer_crime_cover",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Would you like to purchase the extra cover for Computer Crime?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 520,
-          section_detail_id: "a0Uam000001KqBsEAK",
-          section_detail_code: "has_segregated_duties_expense",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "a) Do you segregate duties so that no one person can request or authorise (i) expenditure; (ii) refund monies, or (iii) refund goods?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 530,
-          section_detail_id: null,
-          section_detail_code: "has_segregated_duties_payments",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "b) Do you segregate duties so that no one person can make payments and reconcile bank statements?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 540,
-          section_detail_id: null,
-          section_detail_code: "has_segregated_duties_fund_txns",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "c) Do you segregate duties and system passwords so that no one person can request and authorise the release of electronic funds transfers in respect of the same transaction?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 550,
-          section_detail_id: null,
-          section_detail_code: "has_auth_limits_1K",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "d) Do you require two or more signatories or approvers for fund transfers over $1000?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 560,
-          section_detail_id: null,
-          section_detail_code: "has_social_engg_fraud_ext",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Would the Insured like to purchase the Social Engineering Fraud Extension?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 570,
-          section_detail_id: null,
-          section_detail_code: "has_verified_destination_bank",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "a) Do you have procedures for verifying destination bank accounts and/or any changes to destination bank account details, before funds are transferred?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 580,
-          section_detail_id: null,
-          section_detail_code: "has_approved_vendors",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "b) Do you hold an approved list of vendors and suppliers, including authorised contact people and contact details, which is checked when payments are made?",
-        },
-      ],
-      section_code: "optional_extensions",
-      policy_id: null,
-    },
-    {
-      section_name: "Insurance history",
-      section_index: 600,
-      section_id: null,
-      section_details: [
-        {
-          section_id: null,
-          section_detail_index: 610,
-          section_detail_id: null,
-          section_detail_code: "has_current_cyber_cover",
-          attribute_value: null,
-          attribute_type: "Yes_No",
-          attribute_name:
-            "Does your business currently hold or has ever held Cyber Insurance?",
-        },
-        {
-          section_id: null,
-          section_detail_index: 620,
-          section_detail_id: null,
-          section_detail_code: "has_current_cyber_cover_details",
-          attribute_value: null,
-          attribute_type: "Text",
-          attribute_name: "Please input your insurance providers(s)",
-        },
-      ],
-      section_code: "insurance_history",
-      policy_id: null,
-    },
+    // {
+    //   section_name: "Revenue details",
+    //   section_index: 100,
+    //   section_id: null,
+    //   section_details: [
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 110,
+    //       section_detail_id: null,
+    //       section_detail_code: "total_annual_revenue",
+    //       attribute_value: null,
+    //       attribute_type: "Currency",
+    //       attribute_name: "What is your customer’s total annual revenue?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 120,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_online_revenue",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name: "Is any amount generated from online activities?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 130,
+    //       section_detail_id: null,
+    //       section_detail_code: "total_revenue_online",
+    //       attribute_value: null,
+    //       attribute_type: "Currency",
+    //       attribute_name:
+    //         "Of the total revenue above, how much was generated from online activities? (optional)",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 140,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_50PCT_overseas_revenue",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name: "Is more than 50% derived from overseas?",
+    //     },
+    //   ],
+    //   section_code: "revenue_details",
+    //   policy_id: null,
+    // },
+    // {
+    //   section_name: "Data & Compliance",
+    //   section_index: 200,
+    //   section_id: null,
+    //   section_details: [
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 210,
+    //       section_detail_id: null,
+    //       section_detail_code: "num_customers",
+    //       attribute_value: null,
+    //       attribute_type: "Number",
+    //       attribute_name:
+    //         "How many customers does your business have that you use, store, disclose or collect information from.",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 220,
+    //       section_detail_id: null,
+    //       section_detail_code: "sensitive_data",
+    //       attribute_value: null,
+    //       attribute_type: "MultiSelect Picklist",
+    //       attribute_name:
+    //         "Does your business collect, store, disclose or use any of the following categories of data?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 230,
+    //       section_detail_id: null,
+    //       section_detail_code: "sensitive_data_none_details",
+    //       attribute_value: null,
+    //       attribute_type: "Text",
+    //       attribute_name: "Please provide more details",
+    //     },
+    //   ],
+    //   section_code: "data_compliance",
+    //   policy_id: null,
+    // },
+    // {
+    //   section_name: "Loss History",
+    //   section_index: 300,
+    //   section_id: null,
+    //   section_details: [
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 310,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_claim_issue",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "In the past three years, have you or any of your company's subsidiaries had any incidents, unplanned business interruptions, claims or legal actions involving unauthorised access or misuse of your network that cost more than $5,000?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 320,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_loss_factors",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Are there any factors that you are currently aware of that may cause a loss or claim that may be covered under the ISOA Health Insurance policy you are applying for?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 330,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_loss_factors_details",
+    //       attribute_value: null,
+    //       attribute_type: "Text",
+    //       attribute_name: "Please provide more details",
+    //     },
+    //   ],
+    //   section_code: "loss_history",
+    //   policy_id: null,
+    // },
+    // {
+    //   section_name: "Info security measures",
+    //   section_index: 400,
+    //   section_id: null,
+    //   section_details: [
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 410,
+    //       section_detail_id: null,
+    //       section_detail_code: "num_employees",
+    //       attribute_value: null,
+    //       attribute_type: "Number",
+    //       attribute_name: "How many staff does the company currently have?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 420,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_cyber_training",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Does the Insured provide training or education to employees to increase cyber security awareness and phishing resilience at least annually?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 430,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_qualified_it_team",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Does your business have qualified personnel assigned to manage and secure IT systems?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 440,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_password_policy",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Does your business enforce a password policy requiring strong and unique passwords for all accounts and devices operating?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 450,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_two_factor_auth",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Does your business enforce implementation of two-factor authentication for all accounts where available?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 460,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_malware_protection",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Do you use anti-malware protection for all your devices such as workstations, servers, laptops and any other applicable systems?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 470,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_regular_backups",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Do you perform regular backups of all your business critical data and store one copy off-site?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 480,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_software_patches",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Do you apply updates and patches to software, operating systems and applications including anti-malware protection?",
+    //     },
+    //   ],
+    //   section_code: "info_security_measures",
+    //   policy_id: null,
+    // },
+    // {
+    //   section_name: "Optional Extensions",
+    //   section_index: 500,
+    //   section_id: null,
+    //   section_details: [
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 510,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_computer_crime_cover",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Would you like to purchase the extra cover for Computer Crime?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 520,
+    //       section_detail_id: "a0Uam000001KqBsEAK",
+    //       section_detail_code: "has_segregated_duties_expense",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "a) Do you segregate duties so that no one person can request or authorise (i) expenditure; (ii) refund monies, or (iii) refund goods?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 530,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_segregated_duties_payments",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "b) Do you segregate duties so that no one person can make payments and reconcile bank statements?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 540,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_segregated_duties_fund_txns",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "c) Do you segregate duties and system passwords so that no one person can request and authorise the release of electronic funds transfers in respect of the same transaction?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 550,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_auth_limits_1K",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "d) Do you require two or more signatories or approvers for fund transfers over $1000?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 560,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_social_engg_fraud_ext",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Would the Insured like to purchase the Social Engineering Fraud Extension?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 570,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_verified_destination_bank",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "a) Do you have procedures for verifying destination bank accounts and/or any changes to destination bank account details, before funds are transferred?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 580,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_approved_vendors",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "b) Do you hold an approved list of vendors and suppliers, including authorised contact people and contact details, which is checked when payments are made?",
+    //     },
+    //   ],
+    //   section_code: "optional_extensions",
+    //   policy_id: null,
+    // },
+    // {
+    //   section_name: "Insurance history",
+    //   section_index: 600,
+    //   section_id: null,
+    //   section_details: [
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 610,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_current_cyber_cover",
+    //       attribute_value: null,
+    //       attribute_type: "Yes_No",
+    //       attribute_name:
+    //         "Does your business currently hold or has ever held Cyber Insurance?",
+    //     },
+    //     {
+    //       section_id: null,
+    //       section_detail_index: 620,
+    //       section_detail_id: null,
+    //       section_detail_code: "has_current_cyber_cover_details",
+    //       attribute_value: null,
+    //       attribute_type: "Text",
+    //       attribute_name: "Please input your insurance providers(s)",
+    //     },
+    //   ],
+    //   section_code: "insurance_history",
+    //   policy_id: null,
+    // },
   ],
   referral_reasons: null,
   referral_number: null,

@@ -4,7 +4,7 @@ import { Link } from "@remix-run/react";
 
 const AdditionalInsuranceCTA = () => {
   return (
-    <div className="flex px-6 py-8 bg-white md:bg-custom-gradient sm:px-10 lg:px-[6.25rem] 3xl:px-40 md:py-[4.5rem]">
+    <div className="flex px-6 py-8 bg-[#B6E2FD] sm:px-10 lg:px-[6.25rem] 3xl:px-40 md:py-[4.5rem]">
       <div className="flex justify-center w-full">
         <div className="w-full max-w-[1216px]  flex flex-col  space-y-3 md:flex-row md:space-x-6  md:space-y-0 sm:items-center justify-between">
           <p className="font-bold md:font-black text-xl md:text-[1.65rem] text-start text-primaryBg md:text-white md:text-4xl">

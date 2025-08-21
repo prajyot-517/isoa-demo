@@ -77,7 +77,7 @@ const Summary = () => {
 
   const [businessDetails, setBusinessDetails] = useState({
     insured_contact_email: "",
-    insured_industry: "",
+    visa_status: "",
     insured_company_name: "",
     insured_trading_name: "",
     insured_address_line1: "",
@@ -157,7 +157,7 @@ const Summary = () => {
 
       const newBusinessDetails = {
         insured_contact_email: data?.insured_contact_email || "",
-        insured_industry: data?.insured_industry || "",
+        visa_status: data?.visa_status || "",
         insured_company_name: data?.insured_company_name || "",
         insured_trading_name: data?.insured_trading_name || "",
         insured_address_line1: data?.insured_address_line1 || "",
@@ -542,7 +542,7 @@ const Summary = () => {
                       </span>
                       . If you have any questions, you can contact us below and
                       we’ll get in touch with you. Or call us on{" "}
-                      <span className="text-secondary">1300 555 123</span>{" "}
+                      <span className="text-secondary">(800) 244-1180</span>{" "}
                       (Mon-Fri 9am-5pm) with your quote number{" "}
                       <span className="font-extrabold">
                         {data?.quote?.quote_number}

@@ -19,7 +19,7 @@ const Header = () => {
         {/* <div className="text-right">
           <div className="text-xs sm:text-sm font-normal text-primaryBg">Need help?</div>
           <div className="text-xl font-semibold sm:text-2xl text-primaryBg">
-            Call 1300 555 123
+            Call (800) 244-1180
           </div>
           <div className="text-xs sm:text-sm font-normal text-primaryBg">
             Monday to Friday, 9am-5pm

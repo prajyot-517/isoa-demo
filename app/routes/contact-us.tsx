@@ -296,7 +296,7 @@ const ContactUs = () => {
                         <br className="hidden md:block" />
                         <p>
                           Alternatively, you can call{" "}
-                          <span className="text-secondary">1300 555 123</span>,
+                          <span className="text-secondary">(800) 244-1180</span>,
                           (Mon-Fri, 9am-5pm)
                         </p>
                       </div>
@@ -309,7 +309,7 @@ const ContactUs = () => {
                       <p>
                         We're here to support you 24/7, if you need claim just
                         give us call on our cyber claims hotline{" "}
-                        <span className="text-secondary">(1300 555 123)</span>.
+                        <span className="text-secondary">((800) 244-1180)</span>.
                         Remember to have your policy number handy, so our Cyber
                         Insurance Specialists can get up to speed quickly.
                       </p>
