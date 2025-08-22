@@ -7,7 +7,7 @@ const PolicyStartDateIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="22.3438" cy="21.6562" r="21.6562" fill="#C496FF" />
+      <circle cx="22.3438" cy="21.6562" r="21.6562" fill="#A97155" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

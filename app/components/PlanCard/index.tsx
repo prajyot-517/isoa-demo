@@ -1,10 +1,10 @@
-import { useNavigate } from "@remix-run/react";
+import { useNavigate, useSubmit } from "@remix-run/react";
 import { useState } from "react";
-import { bindQuote } from "~/services/quote.api";
 
 const PlanCard = ({ plan }) => {
   const [expandedCards, setExpandedCards] = useState({});
   const navigate = useNavigate();
+  const submit = useSubmit();
 
   const toggleExpanded = (planType: string) => {
     setExpandedCards((prev) => ({
@@ -13,20 +13,16 @@ const PlanCard = ({ plan }) => {
     }));
   };
 
-//   const handleBuyNow = async () => {
-//     const body = {
-//       quote_id: plan.quote_id_for_bind,
-//       quote_option_id: plan.quote_option_id_for_bind,
-//       policy_id: plan.policy_id,
-//     };
-
-//     try {
-//       const res = await bindQuote(body);
-//       console.log("Bind Quote Success:", res);
-//     } catch (err) {
-//       console.error("Bind Quote Failed:", err);
-//     }
-//   };
+  const handleBuyNow = () => {
+    navigate("/payment-details", {
+      state: {
+        price: plan?.price,
+        quote_id_for_bind: plan?.quote_id_for_bind,
+        quote_option_id_for_bind: plan?.quote_option_id_for_bind,
+        policy_id: plan?.policy_id,
+      },
+    });
+  };
 
   const isExpanded = expandedCards[plan.id];
   const visibleFeatures = plan?.features.filter((f) => f.visible);
@@ -64,10 +60,7 @@ const PlanCard = ({ plan }) => {
         </div>
         <button
           className="w-full bg-[#800032] hover:bg-[#660028] text-white py-3 px-4 rounded-lg font-semibold mb-6"
-          onClick={async () => {
-            // await handleBuyNow();
-            navigate("/payment-details", { state: { price: plan.price } });
-          }}
+          onClick={handleBuyNow}
         >
           Buy now
         </button>

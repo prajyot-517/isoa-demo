@@ -45,7 +45,7 @@ export const NZD = "NZD";
 export const BI_TIME_ACCESS_TOOLTIP =
 	"There is no dollar excess payable for Business Interruption Claims. We will cover losses incurred 12 hours after a Cyber Event that directly causes Business Interruption Loss, subject to terms and conditions.";
 export const ACTIVE_POLICY_OR_QUOTE = "activepolicyorquote";
-export const BINDNZ = "bindNZ";
+export const BINDNZ = "bind";
 export const INSURED_DOMAIN_EMPTY = "insured-domain-empty";
 export const EMAIL_DOCUMENTS = "emaildocuments";
 export const PURCHASE = "purchase";
