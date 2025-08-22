@@ -130,11 +130,11 @@ const FinalQuestionsForm = ({
   };
 
   return (
-    <div className="bg-white rounded-md border-0 shadow-custom">
-      <div className="px-8 py-10 rounded-md xl:py-14 xl:px-16">
+    <div className="">
+      <div className="px-8 py-10 rounded-md xl:py-14 xl:px-2">
         <form className="flex flex-col space-y-16 xl:px-7 text-primaryBg">
           {/* Insurance History */}
-          <div className="flex flex-col space-y-12">
+          {/* <div className="flex flex-col space-y-12">
             <FormSectionHeader
               icon={<InsuranceHistoryIcon />}
               title="Insurance History"
@@ -182,10 +182,10 @@ const FinalQuestionsForm = ({
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
 
           {/* Information Security Measures */}
-          <div className="flex flex-col space-y-16">
+          {/* <div className="flex flex-col space-y-16">
             <FormSectionHeader
               icon={<InformationSecurityMeasuresIcon />}
               title="Information Security Measures"
@@ -272,14 +272,14 @@ const FinalQuestionsForm = ({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Business Details */}
           <div className="flex flex-col space-y-12">
-            <FormSectionHeader
+            {/* <FormSectionHeader
               icon={<BusinessDetailsIcon />}
               title="Business Details"
-            />
+            /> */}
             <div className="flex flex-col space-y-12">
               <div className="flex flex-col mt-8 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
                 <p className="text-grayCustom">Business Name</p>
@@ -294,7 +294,7 @@ const FinalQuestionsForm = ({
                     id="insured_company_name"
                     maxLength={255}
                   />
-                  <div className="pt-3">
+                  {/* <div className="pt-3">
                     <Checkbox
                       label="My trading name is different"
                       name="is_trading_name_different"
@@ -302,11 +302,11 @@ const FinalQuestionsForm = ({
                       onChange={handleCheckBox}
                       id="is_trading_name_different"
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
-              {finalQuestionsDetails?.is_trading_name_different && (
+              {/* {finalQuestionsDetails?.is_trading_name_different && (
                 <div className="flex flex-col mt-8 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
                   <p className="text-grayCustom">Trading Name</p>
                   <div className="w-[289px] md:w-[335px]">
@@ -322,9 +322,9 @@ const FinalQuestionsForm = ({
                     />
                   </div>
                 </div>
-              )}
+              )} */}
 
-              <div className="flex flex-col mt-8 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
+              {/* <div className="flex flex-col mt-8 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
                 <p className="text-grayCustom">Business Address</p>
                 <div className="flex flex-col space-y-5 w-[289px] md:w-[335px]">
                   <input
@@ -373,7 +373,7 @@ const FinalQuestionsForm = ({
                     </p>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* Policy Dates */}
@@ -383,8 +383,10 @@ const FinalQuestionsForm = ({
               title="Policy Start Date"
             />
             <div className="flex flex-col space-y-12">
-              <div className="flex flex-col mt-8 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
-                <p className="text-grayCustom">When do you want to start your policy?</p>
+              <div className="flex flex-col mt-4 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
+                <p className="text-grayCustom">
+                  When do you want to start your policy?
+                </p>
                 <div className=" w-[289px] md:w-[335px]">
                   <div className="relative w-full">
                     <input
@@ -419,7 +421,7 @@ const FinalQuestionsForm = ({
               </div>
 
               {/* <div className="flex flex-col mt-8 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
-                <div>
+                <div className="text-grayCustom">
                   When do you want to end your policy?{" "}
                   <span className="align-middle">
                     <QuestionTooltip tooltipContent="AMI only offers policies with a lifespan between nine to fifteen months." />

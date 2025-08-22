@@ -74,6 +74,7 @@ const QuoteProcessing = () => {
     createPolicyData,
     contactDetails,
     countryCodeForPhoneInitialStep,
+    finalQuestionsDetails,
   } = useAppContext();
   const [openPolicyDeclinedModal, setOpenPolicyDeclinedModal] = useState(false);
   const [declinedReasons, setDeclinedReasons] = useState([]);
@@ -166,10 +167,9 @@ const QuoteProcessing = () => {
 
   // Function to save data and move to next step
   const handleSaveAndNextButton = () => {
-
     let updatedCreatePolicyData = updateSectionDetailsWithUserValues(
       createPolicyData,
-      businessDetails,
+      businessDetails
     );
 
     const formData = new FormData();
@@ -257,21 +257,15 @@ const QuoteProcessing = () => {
     //   removeCommas(businessDetails?.total_revenue_online)
     // );
 
-    formData.append("visa_status", businessDetails?.visa_status);
+    // formData.append("visa_status", businessDetails?.visa_status);
 
-    formData.append("school", businessDetails?.school);
+    // formData.append("school", businessDetails?.school);
 
-    formData.append("age", businessDetails?.age);
+    // formData.append("age", businessDetails?.age);
 
-    formData.append(
-      "waive_out",
-      businessDetails?.waive_out
-    );
+    // formData.append("waive_out", businessDetails?.waive_out);
 
-    formData.append(
-      "description",
-      businessDetails?.description
-    );
+    // formData.append("description", businessDetails?.description);
 
     formData.append(
       "insured_contact_name",
@@ -281,6 +275,16 @@ const QuoteProcessing = () => {
     formData.append(
       "insured_contact_email",
       businessDetails3?.insured_contact_email
+    );
+
+    formData.append(
+      "insured_company_name",
+      finalQuestionsDetails?.insured_company_name
+    );
+
+    formData.append(
+      "policy_inception_date",
+      finalQuestionsDetails?.policy_inception_date
     );
 
     // formData.append(
@@ -309,7 +313,10 @@ const QuoteProcessing = () => {
     //   JSON.stringify(createPolicyData, null, 2)
     // );
 
-    formData.append("createPolicyData", JSON.stringify(updatedCreatePolicyData, null, 2))
+    formData.append(
+      "createPolicyData",
+      JSON.stringify(updatedCreatePolicyData, null, 2)
+    );
 
     formData.append("isCreate", "true");
 
@@ -440,11 +447,7 @@ export async function action({ request }: ActionFunctionArgs) {
   //   });
   // }
 
-
-
-
-// @Add todo
-
+  // @Add todo
 
   // const resData = await getActivePolicyOrQuote(session);
   // if (resData?.data?.policies?.length > 0) {
@@ -463,9 +466,6 @@ export async function action({ request }: ActionFunctionArgs) {
   //     });
   //   }
   // }
-
-
-
 
   try {
     const formData = await request.formData();
@@ -623,6 +623,11 @@ export async function action({ request }: ActionFunctionArgs) {
         insured_contact_phone,
       };
 
+      const finalQuestions: any = {
+        insured_company_name: formData.get("insured_company_name"),
+        policy_inception_date: formData.get("policy_inception_date"),
+      };
+
       const existingBusinessDetails: any = {
         has_existing_business,
         existing_policy_number,
@@ -631,6 +636,7 @@ export async function action({ request }: ActionFunctionArgs) {
         ...response,
         ...businessDetails,
         ...contactDetails,
+        ...finalQuestions,
       };
 
       let section = response?.sections?.find(

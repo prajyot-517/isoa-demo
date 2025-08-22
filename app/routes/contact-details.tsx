@@ -327,9 +327,9 @@
 //                             className={`flex border border-grayCustom rounded-lg w-full`}
 //                           >
 //                             <span
-//                               className="pl-4 
+//                               className="pl-4
 //                          py-[10px]
-//                           pr-2 
+//                           pr-2
 //                           "
 //                             >
 //                               {/* {loaderData?.env?.REMOVE_PHONE_PREFIXES ===
@@ -922,7 +922,7 @@
 // //       "insured_contact_name",
 // //       contactDetails?.insured_contact_name
 // //     );
-    
+
 // //     if (response && !response.newQuote && response?.data?.policies[0]) {
 // //       const data = response?.data?.policies[0];
 // //       formData.append("isUpdate", "true");
@@ -1277,6 +1277,7 @@ import QuestionTooltip from "~/components/common/QuestionTooltip";
 import PromoCodeValidationMessage from "~/components/BusinessDetailsForms/PromoCodeValidationMessage";
 import Checkbox from "~/components/common/Checkbox";
 import InformationCard from "~/components/common/InformationCard";
+import FinalQuestionsForm from "~/components/FinalQuestionsForm";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { searchParams } = new URL(request.url);
@@ -1326,6 +1327,8 @@ export default function ContactDetails() {
     setContactDetails,
     countryCodeForPhoneInitialStep,
     setCountryCodeForPhoneInitialStep,
+    finalQuestionsDetails,
+    setFinalQuestionsDetails,
   } = useAppContext();
   const { setToastProps } = useToast();
   const actionData: any = useActionData();
@@ -1473,6 +1476,7 @@ export default function ContactDetails() {
     }
   }, [actionData]);
 
+
   const handleChange = (e: any) => {
     const { name, value } = e?.target;
     if (name === "insured_contact_email") {
@@ -1486,6 +1490,20 @@ export default function ContactDetails() {
       };
     });
   };
+
+  const handleFormDetailsChange = (e: any) => {
+    const { name, value } = e?.target;
+    // console.log(e, "event handler");
+    // console.log(name,"conatct-details");
+    setFinalQuestionsDetails((data: any) => {
+      return {
+        ...data,
+        [name]: value,
+      };
+    });
+  };
+
+
 
   const handleReferralCode = (e: any) => {
     const { value } = e?.target;
@@ -1571,7 +1589,16 @@ export default function ContactDetails() {
       "insured_contact_name",
       contactDetails?.insured_contact_name
     );
-    
+
+    formData.append(
+      "policy_inception_date",
+      finalQuestionsDetails?.policy_inception_date
+    );
+    formData.append(
+      "insured_company_name",
+      finalQuestionsDetails?.insured_company_name
+    );
+
     if (response && !response.newQuote && response?.data?.policies[0]) {
       const data = response?.data?.policies[0];
       formData.append("isUpdate", "true");
@@ -1591,8 +1618,8 @@ export default function ContactDetails() {
       // businessDetails?.has_50PCT_overseas_revenue?.length == 0 &&
       // businessDetails?.description?.length ==0
       businessDetails?.waive_out?.length == 0 &&
-    (businessDetails?.waive_out == "no" &&
-      businessDetails?.description?.length == 0)
+      businessDetails?.waive_out == "no" &&
+      businessDetails?.description?.length == 0
     ) {
       navigate("/business-details-1?quoteId=" + quoteId);
     }
@@ -1830,7 +1857,7 @@ export default function ContactDetails() {
                           pr-2 
                           "
                             > */}
-                              {/* {loaderData?.env?.REMOVE_PHONE_PREFIXES ===
+                    {/* {loaderData?.env?.REMOVE_PHONE_PREFIXES ===
                               "false" ? (
                                 <select
                                   className={`  border-0 outline-none`}
@@ -1844,13 +1871,13 @@ export default function ContactDetails() {
                                   }}
                                 >
                                   {/* <option value="+64">+64</option> */}
-                                  {/* <option value="+61">+61</option> */}
-                                  {/* <option value="+91">+91</option>  */}
-                                {/* </select>
+                    {/* <option value="+61">+61</option> */}
+                    {/* <option value="+91">+91</option>  */}
+                    {/* </select>
                               ) : (
                                 <span className="text-grayCustom">+61</span>
                               )} */}
-                              {/* <span className="text-grayCustom">+1</span>
+                    {/* <span className="text-grayCustom">+1</span>
                             </span>
                             <input
                               type="tel"
@@ -1920,6 +1947,17 @@ export default function ContactDetails() {
                       backgroundColor="#FAEFFC"
                     />
                   </div> */}
+
+                  <div>
+                    <FinalQuestionsForm
+                      handleChange={handleFormDetailsChange}
+                      handleToggleChange={handleToggleChange}
+                      handleCheckBox={()=>{}}
+                      isValidPostCode={true}
+                      policyType={response?.data?.policies[0]?.policy_type}
+                      parentPolicy={response?.data?.policies[0]?.parent_policy}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -2056,7 +2094,6 @@ export async function action({ request }: ActionFunctionArgs) {
         );
       }
     }
-    console.log(redirect,"redirect -1");
     return redirect("/quote-processing?quoteId=new-quote", {
       headers: { "Set-Cookie": await commitSession(session) },
     });
@@ -2076,4 +2113,3 @@ export async function action({ request }: ActionFunctionArgs) {
     );
   }
 }
-

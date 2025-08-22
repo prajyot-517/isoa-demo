@@ -43,13 +43,13 @@ import { downloadDocumentUtil, isDatePassed } from "~/utils";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("cookie"));
-  if (!(await verifyAuthToken(session))) {
-    return redirect("/login", {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-    });
-  }
+  // if (!(await verifyAuthToken(session))) {
+  //   return redirect("/login", {
+  //     headers: {
+  //       "Set-Cookie": await destroySession(session),
+  //     },
+  //   });
+  // }
   const { searchParams } = new URL(request.url);
   const policyId: any = searchParams.get("policyId");
   const response = await getPolicyById(session, policyId);

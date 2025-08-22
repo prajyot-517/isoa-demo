@@ -1500,7 +1500,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap justify-center gap-6">
               {plans?.map((plan) => (
-                <PlanCard plan={plan} />
+                <PlanCard key={plan.id}plan={plan} />
               ))}
             </div>
           </div>

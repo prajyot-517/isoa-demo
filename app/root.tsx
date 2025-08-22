@@ -55,9 +55,10 @@ const Layout: React.FC<props> = ({ children }: props) => {
     }
     else if (pathname.includes("quote")) {
       setStepState({ currentStep: 3, subStep: 1 });
-    }  else if (pathname.includes("final-questions")) {
+    }  else if (pathname.includes("payment-details")) {
       setStepState({ currentStep: 4, subStep: 1 });
-    } else if (pathname.includes("summary")) {
+    } 
+    else if (pathname.includes("my-policy")) {
       setStepState({ currentStep: 5, subStep: 1 });
     }
   }, [location, setStepState]);

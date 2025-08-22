@@ -60,7 +60,7 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
       nameStyle: "",
     },
     {
-      name: "Final Questions",
+      name: "Payment Details",
       liStyle: `${
         currentStep === 4
           ? "flex"
@@ -80,7 +80,7 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
       } lg:flex`,
     },
     {
-      name: "Summary",
+      name: "My Quote",
       liStyle: `${
         currentStep === 5
           ? "flex"
@@ -99,23 +99,23 @@ const PolicyProgressBar: React.FC<PolicyProgressBarProps> = ({
           : "hidden"
       } xl:flex`,
     },
-    {
-      name: "Buy Policy",
-      liStyle: `${
-        currentStep === 6
-          ? "flex"
-          : currentStep + 1 === 6
-          ? "hidden sm:flex  sm:px-6 md:px-0"
-          : "hidden"
-      } relative cursor-default md:flex`,
-      divStyle:
-        "md:border-r flex justify-center items-center space-x-2 md:border-gray-300 my-1 py-3 md:px-6 flex-1 whitespace-nowrap text-lg font-bold",
-      nameStyle: `${
-        currentStep === 6 || currentStep + 1 === 6
-          ? "sm:flex md:hidden"
-          : "hidden"
-      } 2xl:flex`,
-    },
+    // {
+    //   name: "Buy Policy",
+    //   liStyle: `${
+    //     currentStep === 6
+    //       ? "flex"
+    //       : currentStep + 1 === 6
+    //       ? "hidden sm:flex  sm:px-6 md:px-0"
+    //       : "hidden"
+    //   } relative cursor-default md:flex`,
+    //   divStyle:
+    //     "md:border-r flex justify-center items-center space-x-2 md:border-gray-300 my-1 py-3 md:px-6 flex-1 whitespace-nowrap text-lg font-bold",
+    //   nameStyle: `${
+    //     currentStep === 6 || currentStep + 1 === 6
+    //       ? "sm:flex md:hidden"
+    //       : "hidden"
+    //   } 2xl:flex`,
+    // },
   ];
 
   useEffect(() => {
