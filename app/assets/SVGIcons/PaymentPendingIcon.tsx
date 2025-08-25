@@ -11,7 +11,7 @@ const PaymentPendingIcon = () => {
         cy="61.9645"
         rx="59.0625"
         ry="58.0348"
-        fill="#C496FF"
+        fill="#A97155"
       />
       <path
         fillRule="evenodd"

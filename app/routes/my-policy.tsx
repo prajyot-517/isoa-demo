@@ -224,7 +224,7 @@ const MyPolicy = () => {
                       )
                     }
                   >
-                    existing Cyber Insurance policy
+                    existing Health Insurance policy
                   </span>{" "}
                   with us.
                 </p>
@@ -294,7 +294,7 @@ const MyPolicy = () => {
           ) : (
             <div className="mt-[2px] md:mt-1"></div>
           )}
-          <div className="flex justify-center bg-custom-gradient">
+          <div className="flex justify-center bg-[#B6E2FD]">
             <div className="max-w-[1536px] w-full">
               <div className="px-9 pt-12  text-white h-52 md:h-72 md:px-16 lg:px-48 md:pt-16">
                 <div className="flex flex-col space-y-2">

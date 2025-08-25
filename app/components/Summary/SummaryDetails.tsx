@@ -683,7 +683,7 @@ const SummaryDetails: React.FC<props> = ({
 
           <div className="flex flex-col space-y-4">
             <p className="font-bold">
-              Does your business currently hold or has ever held Cyber Insurance
+              Does your business currently hold or has ever held Health Insurance
               providing the same or similar cover as the insurance sought?{" "}
             </p>
             <p>

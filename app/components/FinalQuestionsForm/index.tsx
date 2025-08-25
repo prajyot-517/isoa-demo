@@ -131,7 +131,7 @@ const FinalQuestionsForm = ({
 
   return (
     <div className="">
-      <div className="px-8 py-10 rounded-md xl:py-14 xl:px-2">
+      <div className="px-8 py-10 rounded-md xl:py-6 xl:px-2">
         <form className="flex flex-col space-y-16 xl:px-7 text-primaryBg">
           {/* Insurance History */}
           {/* <div className="flex flex-col space-y-12">
@@ -281,9 +281,8 @@ const FinalQuestionsForm = ({
               title="Business Details"
             /> */}
             <div className="flex flex-col space-y-12">
-              <div className="flex flex-col mt-8 space-y-3 sm:flex-row sm:justify-between sm:space-y-0 sm:space-x-4 md:space-y-0">
-                <p className="text-grayCustom">Business Name</p>
-                <div className="flex flex-col space-y-5 w-[289px] md:w-[335px]">
+              <div className="flex flex-col mt-8 space-y-2 w-full">
+                <p className="text-grayCustom font-bold text-[1.25rem]">Business Name</p>
                   <input
                     type="text"
                     name="insured_company_name"
@@ -303,7 +302,6 @@ const FinalQuestionsForm = ({
                       id="is_trading_name_different"
                     />
                   </div> */}
-                </div>
               </div>
 
               {/* {finalQuestionsDetails?.is_trading_name_different && (

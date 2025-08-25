@@ -382,7 +382,7 @@ const ContactUs = () => {
                             {!isValidPhone &&
                               contactUsData?.phone?.length > 0 && (
                                 <p className="text-red-500 text-xs mt-2">
-                                  Please enter a valid Australia phone number.
+                                  Please enter a valid US phone number.
                                 </p>
                               )}
                           </div>
@@ -539,7 +539,7 @@ const ContactUs = () => {
               Thank you for reaching out to us!
             </h1>
             <p>
-              One of our Cyber Insurance Specialists will get back <br /> to you
+              One of our Health Insurance Specialists will get back <br /> to you
               within 1-3 business days.
             </p>
           </div>

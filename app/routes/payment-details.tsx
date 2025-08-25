@@ -216,10 +216,10 @@
 import { useState, useEffect } from "react";
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import {
-  useLocation,
   useNavigate,
   useSubmit,
   useActionData,
+  useSearchParams,
 } from "@remix-run/react";
 import {
   getSession,
@@ -245,17 +245,16 @@ export default function PaymentDetails() {
   const [loading, setLoading] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
-  const location = useLocation();
   const navigate = useNavigate();
   const submit = useSubmit();
   const actionData: any = useActionData();
 
-  const { price, quote_id_for_bind, quote_option_id_for_bind, policy_id } = location.state || {
-    price: "",
-    quote_id_for_bind: "",
-    quote_option_id_for_bind: "",
-    policy_id: "",
-  };
+  const [searchParams] = useSearchParams();
+
+  const price = searchParams.get("price");
+  const quoteId = searchParams.get("quote_id_for_bind");
+  const quoteOptionId = searchParams.get("quote_option_id_for_bind");
+  const policyId = searchParams.get("policy_id");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -286,9 +285,9 @@ export default function PaymentDetails() {
     bindForm.append(
       "bindQuotePayload",
       JSON.stringify({
-        quote_id_for_bind,
-        policy_id,
-        quote_option_id_for_bind,
+        quote_id_for_bind:quoteId,
+        policy_id:policyId,
+        quote_option_id_for_bind:quoteOptionId,
       })
     );
     submit(bindForm, { method: "POST" });
@@ -296,7 +295,6 @@ export default function PaymentDetails() {
 
   useEffect(() => {
     if (!actionData) return;
-    console.log("actionData:", actionData);
     if (actionData.response?.isQuoteBound === true) {
       setPaymentSuccess(true);
     } else {
@@ -314,7 +312,7 @@ export default function PaymentDetails() {
       cvv: "",
       cardHolder: "",
     });
-    navigate(`/my-policy?policyId=${policy_id}`);
+    navigate(`/my-policy?policyId=${policyId}`);
   };
 
   if (paymentSuccess) {

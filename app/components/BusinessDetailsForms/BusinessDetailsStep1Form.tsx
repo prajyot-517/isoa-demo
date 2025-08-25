@@ -80,8 +80,8 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
       <div className="px-8 py-10 rounded-md md:py-20">
         <Form className="max-w-[760px] mx-auto">
           <div className="flex flex-col justify-center items-center font-extrabold text-2xl text-primary space-y-8">
-            <div className="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
-              <label htmlFor="industry_code">My visa status</label>
+            <div className="flex items-center space-x-4 w-full">
+              <label htmlFor="industry_code" className="w-40">My visa status</label>
               <select
                 name="visa_status"
                 value={businessDetails?.visa_status || ""}
@@ -160,10 +160,10 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
               </div>
             </div> */}
 
-            <div className="flex flex-col">
+            <div className="flex items-center space-x-4 w-full">
               <div className="flex flex-col items-center sm:flex-row sm:space-x-4">
-                <span className="whitespace-nowrap">My school</span>
-                <div className="relative md:mt-[-4px] md:mx-4 w-full">
+                <label className="w-40">My school</label>
+                <div className="relative md:mt-[-4px] md:mx-4">
                   <input
                     type="text"
                     name="school"
@@ -212,9 +212,9 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
               </div>
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex items-center space-x-4 w-full">
               <div className="flex flex-col items-center sm:flex-row sm:space-x-4">
-                <span>My age</span>
+                <label className="w-40">My age</label>
                 <div className="relative md:mt-[-4px] md:mx-4">
                   {/* <span className="absolute inset-y-0 bottom-1 left-0 px-1 flex items-center">
                     $
@@ -232,7 +232,7 @@ const BusinessDetailsStep1Form: React.FC<props> = ({
                         setAgeError("");
                       }
                     }}
-                    className="w-full pl-6 bg-transparent border-b-2 border-primaryBg outline-none"
+                    className="w-full bg-transparent border-b-2 border-primaryBg outline-none text-lg"
                     value={businessDetails?.age}
                     id="age"
                   />

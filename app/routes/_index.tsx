@@ -35,7 +35,7 @@ export default function Index() {
         <div className="flex flex-col justify-center items-center mt-16">
           {/* <Loading /> */}
 
-          <div className="flex gap-2 mt-12">
+          <div className="flex gap-2 mt-44">
             <div className="h-4 w-4 sm:h-6 sm:w-6 md:h-[1.625rem] md:w-[1.625rem] bg-secondaryBg rounded-full animate-loader" />
             <div className="h-4 w-4 sm:h-6 sm:w-6 md:h-[1.625rem] md:w-[1.625rem] bg-secondaryBg rounded-full animate-loader animation-delay-200" />
             <div className="h-4 w-4 sm:h-6 sm:w-6 md:h-[1.625rem] md:w-[1.625rem] bg-secondaryBg rounded-full animate-loader animation-delay-400" />

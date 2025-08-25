@@ -6,7 +6,7 @@ const ExclamationMarkIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="61.4375" cy="59.0625" r="59.0625" fill="#C496FF" />
+      <circle cx="61.4375" cy="59.0625" r="59.0625" fill="#A97155" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
