@@ -144,7 +144,7 @@ const createEmailTemplate = async (
     },
     Message: {
       Subject: {
-        Data: "ISOA Cyber Insurance: Verify your Email",
+        Data: "ISOA Health Insurance: Verify your Email",
       },
       Body: {
         Html: {

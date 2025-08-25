@@ -24,7 +24,7 @@ const BusinessDetailsStep3Form: React.FC<props> = ({
             <div className="flex flex-col space-y-4">
               <div className="flex items-center space-x-3">
                 <EmailAddressIcon />
-                <h1 className="font-bold text-3xl"> Email address </h1>
+                <h1 className="font-bold text-2xl"> Email address </h1>
               </div>
               <p className="text-primary">
                 A one-time password will be sent to this email address for

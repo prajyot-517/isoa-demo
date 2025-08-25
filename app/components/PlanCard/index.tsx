@@ -14,15 +14,15 @@ const PlanCard = ({ plan }) => {
   };
 
   const handleBuyNow = () => {
-    navigate("/payment-details", {
-      state: {
-        price: plan?.price,
-        quote_id_for_bind: plan?.quote_id_for_bind,
-        quote_option_id_for_bind: plan?.quote_option_id_for_bind,
-        policy_id: plan?.policy_id,
-      },
-    });
-  };
+  const queryParams = new URLSearchParams({
+    price: plan?.price,
+    quote_id_for_bind: plan?.quote_id_for_bind,
+    quote_option_id_for_bind: plan?.quote_option_id_for_bind,
+    policy_id: plan?.policy_id,
+  }).toString();
+ 
+  navigate(`/payment-details?${queryParams}`);
+};
 
   const isExpanded = expandedCards[plan.id];
   const visibleFeatures = plan?.features.filter((f) => f.visible);

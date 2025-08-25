@@ -632,7 +632,7 @@ export default function BusinessDetailsStep3() {
                             contactDetails?.insured_contact_phone?.length >
                               0 && (
                               <p className="text-red-500 text-xs mt-2">
-                                Please enter a valid Australia phone number.
+                                Please enter a valid US phone number.
                               </p>
                             )}
                         </div>

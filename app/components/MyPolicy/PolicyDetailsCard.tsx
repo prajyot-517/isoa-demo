@@ -156,12 +156,12 @@ const PolicyDetailsCard = ({
           </div>
           <hr />
           <div className="flex flex-wrap gap-y-6 gap-x-[2rem] xl:gap-x-[3rem]">
-            <div className="flex flex-col font-bold">
+            {/* <div className="flex flex-col font-bold">
               <p className="text-primaryBg">Trading name</p>
               <p className="text-[1.25rem] font-bold">
                 {responseData?.insured_trading_name}
               </p>
-            </div>
+            </div> */}
 
             <div className="flex flex-col font-bold">
               <p className="text-primaryBg">Policy start date</p>
@@ -177,14 +177,14 @@ const PolicyDetailsCard = ({
               </p>
             </div>
 
-            <div className="flex flex-col font-bold">
+            {/* <div className="flex flex-col font-bold">
               <p className="text-primaryBg">Policy effective start date </p>
               <p className="text-[1.25rem] font-bold ">
                 {responseData?.effective_date}
               </p>
-            </div>
+            </div> */}
 
-            <div className="flex flex-col font-bold">
+            {/* <div className="flex flex-col font-bold">
               <div className="text-primaryBg">
                 Policy effective end date{" "}
                 {succeedingBoundOrCancelledPolicy && (
@@ -200,7 +200,7 @@ const PolicyDetailsCard = ({
               >
                 {responseData?.effective_end_date}
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -208,12 +208,12 @@ const PolicyDetailsCard = ({
       {/* Cover */}
       <div>
         {/* Heading */}
-        <div className="py-4 px-6 sm:px-9 md:px-16 bg-[#F5F5F5]">
+        {/* <div className="py-4 px-6 sm:px-9 md:px-16 bg-[#F5F5F5]">
           <div className="flex space-x-6 items-center">
             <CoverIcon />
             <h2 className="font-black text-2xl">Cover</h2>
           </div>
-        </div>
+        </div> */}
 
         {/* Table */}
         <div className="py-10 px-6 md:px-10 lg:px-16">
@@ -629,7 +629,7 @@ const PolicyDetailsCard = ({
               </div>
               <div className="flex flex-col space-y-4">
                 <h2 className="font-bold text-2xl">
-                  No longer need Cyber Insurance?
+                  No longer need Health Insurance?
                 </h2>
                 <p>
                   You can cancel your policy at any time. If you cancel your
@@ -637,14 +637,14 @@ const PolicyDetailsCard = ({
                   will be refunded through the credit card you purchased the
                   policy with. This may take up to 5-10 business days.
                 </p>
-                <p
+                {/* <p
                   className="text-secondary underline cursor-pointer w-fit"
                   onClick={() =>
                     navigate("/cancel-policy/step-1?policyId=" + policyId)
                   }
                 >
                   Cancel policy
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

@@ -58,10 +58,10 @@ const GetInTouchCard = () => {
             </div>
             <div>
               <p className="text-center">
-                Have questions about Cyber Insurance or your quote?
+                Have questions about Health Insurance or your quote?
               </p>
               <p className="text-center">
-                Send us a message and one of our Cyber Insurance Specialists
+                Send us a message and one of our Health Insurance Specialists
                 will get back to you within 1-3 business days.
                 <span className="hidden md:inline-block">&nbsp;</span>
                 <br className="md:block hidden" /> 
@@ -78,7 +78,7 @@ const GetInTouchCard = () => {
               </p>
             </div>
           </div>
-          <div className="w-60 mt-3 sm:mt-0">
+          {/* <div className="w-60 mt-3 sm:mt-0">
             <Button
               onClick={() => {
                 navigate("/contact-us");
@@ -90,7 +90,7 @@ const GetInTouchCard = () => {
               tooltipContent=""
               id="get_in_touch_contact_us"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

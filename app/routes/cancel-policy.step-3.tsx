@@ -125,7 +125,7 @@ const CancelPolicyStep3 = () => {
 
               <div className="flex flex-col space-y-10 text-primaryBg md:space-y-14">
                 <h1 className="font-black text-[1.625rem] text-center md:text-4xl">
-                  Your cancellation request has been sent to a Cyber Insurance
+                  Your cancellation request has been sent to a Health Insurance
                   Specialist
                 </h1>
 
